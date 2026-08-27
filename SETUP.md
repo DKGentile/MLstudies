@@ -44,7 +44,9 @@ installer page, then install [requirements-ml.txt](requirements-ml.txt).
 The exercises require a C++17 compiler. Reasonable choices are:
 
 - Windows: Visual Studio Build Tools with the “Desktop development with C++”
-  workload, or WSL2 with GCC/Clang.
+  workload, or WSL2 with GCC/Clang. The full Visual Studio IDE is not required;
+  VS Code is a suitable editor. On Windows, open a **Developer PowerShell for VS
+  2022** so `cl`, CMake, the SDK, and linker environment are initialized.
 - Linux: GCC or Clang plus CMake and Ninja.
 
 Each C++ chapter shows a direct compiler command as well as CMake where supplied.

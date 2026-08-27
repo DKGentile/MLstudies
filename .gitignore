@@ -6,7 +6,8 @@ __pycache__/
 .ruff_cache/
 .mypy_cache/
 .idea/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
 
 # Native build products
 build/
@@ -41,4 +42,3 @@ wandb/
 !07_edge_detect_track/results/README.md
 !07_edge_detect_track/results/*.template.csv
 !07_edge_detect_track/results/*.template.md
-
