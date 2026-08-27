@@ -19,6 +19,62 @@ clang++ --version   # Clang, or
 cl                  # MSVC Developer shell
 ```
 
+## Understand the Windows toolchain environment
+
+VS Code is the editor. MSVC is a separate toolchain: `cl.exe` compiles,
+`nmake.exe` executes this build graph, and the Windows SDK supplies headers and
+libraries. Installing Visual Studio Build Tools does not put all of those tools
+and paths into every shell globally. A Visual Studio developer shell initializes
+`PATH`, `INCLUDE`, `LIB`, and related variables for one process and its children.
+
+CMake also has two distinct stages:
+
+1. **Configure/generate:** `cmake --preset default` selects a compiler and a
+   generator and writes their locations into `build/CMakeCache.txt`.
+2. **Build:** `cmake --build --preset default` reads that generated build tree
+   and invokes its build tool.
+
+This module's current Windows build tree uses the `NMake Makefiles` generator.
+Consequently, `cmake --build` must be able to find `nmake.exe`. An ordinary Git
+Bash process can find CMake but does not automatically inherit the MSVC
+developer environment, which produces `no such file or directory` when CMake
+tries to start `nmake`.
+
+### MSVC from VS Code
+
+The workspace defines an **MSVC Developer PowerShell** terminal profile. Reload
+the VS Code window, open a new terminal, and verify the environment instead of
+assuming it is active:
+
+```powershell
+Get-Command cl,nmake,cmake
+```
+
+Existing terminal processes do not gain a newly configured environment. In the
+new developer terminal, run the CMake commands below directly.
+
+### MSVC while keeping Git Bash
+
+Environment variables are inherited by child processes. Start Git Bash from an
+initialized Developer PowerShell:
+
+```powershell
+& 'C:\Program Files\Git\bin\bash.exe' --login
+```
+
+Then verify the inherited toolchain from Bash:
+
+```bash
+command -v cl
+command -v nmake
+command -v cmake
+```
+
+This is still the MSVC toolchain; Bash is only the command interpreter. A native
+MinGW, MSYS2, or WSL compiler is a different toolchain and should use a separate
+CMake preset and build directory. Never reuse one CMake build tree across
+different generators or compilers.
+
 ## CMake workflow
 
 Run from `01_cpp_fluency`:

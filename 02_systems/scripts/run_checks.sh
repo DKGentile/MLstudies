@@ -18,4 +18,3 @@ if [ -n "$pattern" ]; then
 else
   ctest --preset default
 fi
-
