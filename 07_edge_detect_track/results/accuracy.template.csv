@@ -1,0 +1,2 @@
+date,git_commit,dataset_version,split,model_sha256,runtime,precision,input_size,iou_threshold,confidence_threshold,map_50,map_50_95,precision,recall,notes
+

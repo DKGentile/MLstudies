@@ -1,0 +1,5 @@
+# First choose the correct platform/CUDA install command at:
+# https://pytorch.org/get-started/locally/
+torch
+torchvision
+matplotlib>=3.8

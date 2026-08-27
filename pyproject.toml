@@ -1,0 +1,19 @@
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = [
+  "03_ml_fundamentals",
+  "04_computer_vision",
+  "05_cuda",
+  "06_gpu_optimization",
+  "07_edge_detect_track",
+]
+markers = [
+  "exercise: a learner-facing specification that may fail before its TODO is solved",
+  "gpu: requires a compatible GPU runtime",
+  "slow: downloads data or performs meaningful training",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+

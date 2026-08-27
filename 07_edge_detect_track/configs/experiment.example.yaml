@@ -1,0 +1,14 @@
+# Copy to an unignored filename and replace values for each experiment.
+experiment: baseline-small-detector
+seed: 0
+model: yolov8n.pt  # conservative Nano-oriented baseline; verify support in your environment
+data: path/to/dataset.yaml
+epochs: 50
+image_size: 416
+batch: 16
+device: 0
+workers: 4
+project: runs/edge-detect-track
+name: baseline
+notes: "State the hypothesis this run tests."
+

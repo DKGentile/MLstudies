@@ -1,0 +1,44 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.idea/
+.vscode/
+
+# Native build products
+build/
+cmake-build-*/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+
+# Data, models, engines, media, and profiler captures
+data/
+datasets/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.plan
+*.trt
+*.mp4
+*.avi
+*.mov
+*.ncu-rep
+*.nsys-rep
+
+# Experiment outputs (templates and README files remain tracked)
+runs/
+wandb/
+07_edge_detect_track/results/*
+!07_edge_detect_track/results/README.md
+!07_edge_detect_track/results/*.template.csv
+!07_edge_detect_track/results/*.template.md
+

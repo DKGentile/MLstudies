@@ -1,0 +1,6 @@
+# Keep deployment dependencies in a dedicated environment when possible.
+ultralytics
+onnx
+onnxruntime
+opencv-python
+

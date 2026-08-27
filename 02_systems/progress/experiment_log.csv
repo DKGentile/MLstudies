@@ -1,0 +1,3 @@
+date,lab,host,os,compiler,build_type,variable,value,metric,result,units,notes
+YYYY-MM-DD,week01,hostname,os-name,compiler-version,Debug,example,0,elapsed,0,ms,
+

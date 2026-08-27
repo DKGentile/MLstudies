@@ -1,0 +1,2 @@
+date,git_commit,machine,gpu,software_stack,model_sha256,runtime,precision,input_shape,batch,warmup,iterations,stage,median_ms,p95_ms,p99_ms,fps,peak_memory_mb,command,notes
+
