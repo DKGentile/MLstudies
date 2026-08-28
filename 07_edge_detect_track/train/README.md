@@ -1,5 +1,17 @@
 # Detector Training Lab
 
+## Prepare
+
+Read Ultralytics' [training-mode documentation](https://docs.ultralytics.com/modes/train/),
+PyTorch's [reproducibility note](https://docs.pytorch.org/docs/stable/notes/randomness.html),
+and the experiment sequence in PyTorch's [transfer-learning tutorial](https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html).
+
+Before a full run, write down the split identity, seed, model/weight hash,
+package versions, input size, augmentation, optimizer, and selection metric.
+Reproducibility means controlling and recording known inputs; it does not mean
+claiming bitwise identity across every platform. Overfit a tiny subset before
+tuning a model that may still have a broken data or loss path.
+
 Training is an experiment, not a ceremony. Begin with a pre-trained nano detector
 and a small input size that leaves room for the deployment target.
 
@@ -28,4 +40,3 @@ Run only after stating a hypothesis:
 For every run, save train/validation curves, best checkpoint hash, config, elapsed
 time, peak VRAM, per-class metrics, and a one-paragraph conclusion. Do not tune on
 the test split.
-

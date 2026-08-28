@@ -6,14 +6,29 @@ expected to fail until the corresponding TODO is complete.
 
 ## A lab session
 
-1. Read the chapter's `README.md` and the exercise docstring.
-2. Predict the output, complexity, and likely failure cases before coding.
-3. Run the smallest relevant test once to see its contract.
-4. Implement only enough to make one new case pass.
-5. Add at least one adversarial test that was not supplied.
-6. Run with warnings/sanitizers or a profiler when the chapter asks for it.
-7. Write the result in the log using evidence: input size, median time, hardware,
+1. Complete the local `Prepare` or resource-route item for the exact week/lab.
+   Close the source and answer its ready-to-code check in your own words.
+2. Read the exercise contract, starter docstrings, and nearest tests.
+3. Predict the output, complexity, invariant, and likely failure cases before coding.
+4. Run the smallest relevant test once to see its contract.
+5. Implement only enough to make one new case pass.
+6. Add at least one adversarial test that was not supplied.
+7. Run with warnings/sanitizers or a profiler when the chapter asks for it.
+8. Write the result in the log using evidence: input size, median time, hardware,
    and software versions.
+
+## How to use the resources
+
+- **Core before coding** establishes the mechanism needed by the local exercise
+  and checkpoint. Time-box it, take sparse notes, and then close it.
+- **API reference while coding** answers contract and syntax questions. Consulting
+  documentation is normal engineering; copying an exercise implementation is not.
+- **Extension after first attempt** is for explaining an observed failure or
+  comparing a completed baseline. Worked editorials belong here.
+
+The local ready-to-code check is the gate between reading and implementation. If
+you cannot answer it, return to the specific paragraph or lecture segment that
+covers the gap instead of consuming another broad tutorial.
 
 ## Red tests versus repository validation
 

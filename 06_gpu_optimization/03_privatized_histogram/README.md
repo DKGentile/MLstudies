@@ -1,5 +1,16 @@
 # Stage 03: Privatize a contended histogram
 
+## Prepare
+
+Read NVIDIA's [Fast Histograms Using Shared Atomics](https://developer.nvidia.com/blog/gpu-pro-tip-fast-histograms-using-shared-atomics-maxwell/).
+Extract the two-phase structure—block-local accumulation followed by global
+merge—and the reason its performance depends on both data distribution and GPU
+architecture.
+
+Before coding, calculate the requested global atomic count for the baseline and
+for one merge of 256 bins per launched block. This is a hypothesis about work;
+the profiler must determine whether it is the active bottleneck.
+
 The baseline sends every increment to one of 256 bins in global memory. The
 harness first validates all 256 byte values, then validates and benchmarks a
 64-bin distribution that creates heavier contention. Implement a per-block

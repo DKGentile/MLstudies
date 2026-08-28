@@ -1,5 +1,16 @@
 # Original Jetson Nano Deployment
 
+## Prepare
+
+Use NVIDIA's [JetPack archive](https://developer.nvidia.com/embedded/jetpack-archive)
+to identify the exact JetPack/L4T/CUDA/cuDNN/TensorRT combination already on the
+device. Read the archived Nano [power-management guide](https://docs.nvidia.com/jetson/archives/l4t-archived/l4t-3275/Tegra%20Linux%20Driver%20Package%20Development%20Guide/power_management_nano.html)
+before comparing performance across modes.
+
+Do not begin with package upgrades. First capture versions, power mode, clocks,
+cooling, free memory/storage, and a recoverable image. The compatibility matrix
+is part of the target, not setup noise.
+
 This lab targets the original Nano generation, not an Orin Nano. Treat it as a
 legacy deployment target with its own immutable environment.
 
@@ -31,4 +42,3 @@ prevent model execution. Complete [DEFERRAL.template.md](DEFERRAL.template.md), 
 the measured desktop deployment, and return only if a narrower hypothesis emerges.
 
 Official source of truth: [NVIDIA JetPack archive](https://developer.nvidia.com/embedded/jetpack-archive).
-

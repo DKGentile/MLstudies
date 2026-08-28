@@ -1,5 +1,18 @@
 # Timed Coding Prompts
 
+## Prepare
+
+Use Princeton's [Algorithms lecture map](https://algs4.cs.princeton.edu/lectures/)
+to review only a weak pattern: stacks/queues, analysis, union-find, priority
+queues, symbol tables, or graphs. For BFS/DFS/cycle/topological reasoning, MIT's
+[DFS lecture](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-10-depth-first-search/)
+is the conceptual reference.
+
+Do not watch a solution immediately before its matching prompt. Review the data
+structure, wait at least a day, then solve from the contract. The score is based
+on a stated invariant, tested implementation, complexity, and extension—not on
+recognizing a memorized body.
+
 Implement these in C++17 without looking up a full solution. Write your own tests
 before checking an online equivalent. For each prompt, state the invariant,
 complexity, and one production-oriented extension.
@@ -66,4 +79,3 @@ After time expires, mark one of:
 
 Retry `debugged` after three days and `hinted/review` the next morning. Count a
 problem only when it becomes `independent`.
-

@@ -51,11 +51,13 @@ week-by-week route and gates.
 
 ## The daily loop
 
-1. Read one short concept note (at most 20 minutes).
+1. Complete the local `Prepare` assignment and answer its ready-to-code check
+   without the source open.
 2. Implement the starter exercise without an assistant-generated solution.
 3. Run the nearest test; use the failure as feedback.
-4. Explain the complexity or performance model out loud.
-5. Record a number, failure, or decision in your weekly log.
+4. Explain the invariant, complexity, or performance model out loud.
+5. Use the after-first-attempt resource only for a concrete gap or result.
+6. Record a number, failure, or decision in your weekly log.
 
 Use AI as a reviewer after Weeks 1–2: ask it to identify counterexamples, critique
 a benchmark, or question an explanation. The point of this repository is to make

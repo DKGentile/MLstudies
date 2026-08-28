@@ -15,6 +15,22 @@ you when your kernel is correct and then reports a kernel-only timing.
 | 04 | Byte histogram | Atomics and contention | All 256 bins match the CPU |
 | 05 | Box blur | 2-D neighborhoods and boundary policy | CPU and GPU images agree |
 
+## Resource route
+
+Use the resource beside the lab, then return to the kernel. The NVIDIA guide is
+the language/runtime contract; the blog posts are focused explanations by CUDA
+engineers. Read optimized variants only after your own baseline is correct.
+
+| Lab | Core preparation | What you must extract |
+|---|---|---|
+| 01 | CUDA Programming Guide: [programming model](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html) and NVIDIA's [grid-stride loops](https://developer.nvidia.com/blog/cuda-pro-tip-write-flexible-kernels-grid-stride-loops/) | Global index, global stride, bounds, and why launch size need not equal data size |
+| 02 | CUDA Programming Guide: [thread hierarchy](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-cuda-kernels.html#thread-hierarchy) | Map block/thread coordinates to `(x, y)` and then to a row-major address |
+| 03 | NVIDIA: [using shared memory](https://developer.nvidia.com/blog/using-shared-memory-cuda-cc/) and Mark Harris's [reduction slides](https://developer.download.nvidia.com/assets/cuda/files/reduction.pdf) | Block-local storage, barrier participation, partial blocks, and one partial result per block |
+| 04 | CUDA Programming Guide: [atomics](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-cuda-kernels.html#atomics) | Atomicity makes an update indivisible; it does not eliminate serialization under contention |
+| 05 | NVIDIA: [finite-difference stencil, Part 1](https://developer.nvidia.com/blog/finite-difference-methods-cuda-cc-part-1/) | Neighborhood geometry, halos, repeated loads, and boundary handling |
+
+Each leaf README narrows the reading and supplies a before-coding check.
+
 The order matters. Do not optimize a failing kernel, and do not copy a finished
 kernel from elsewhere. For each lab:
 

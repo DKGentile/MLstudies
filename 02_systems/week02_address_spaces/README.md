@@ -1,8 +1,42 @@
 # Week 2 lab: Address spaces, allocation, and resident pages
 
-Read OSTEP chapters 13-15. Be able to distinguish virtual address, physical
-memory, translation, valid mapping, and page fault. Do not infer physical layout
-from the numeric order of virtual addresses.
+## Prepare
+
+**Required concepts**
+
+- Read OSTEP [Chapter 13: The Address
+  Space](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf), [Chapter 14:
+  Memory API](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-api.pdf), and [Chapter
+  15: Address
+  Translation](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-mechanism.pdf). Be able
+  to distinguish virtual address, physical memory, mapping, translation, and a
+  page fault before implementing the probe.
+- Read Microsoft's [virtual-address-space
+  overview](https://learn.microsoft.com/en-us/windows/win32/memory/virtual-address-space)
+  and [working-set
+  guide](https://learn.microsoft.com/en-us/windows/win32/memory/working-set).
+  Before Experiments 2-3, predict which quantities allocation can change and
+  which require touching pages. Do not infer physical layout from the numeric
+  order of virtual addresses.
+
+**API references while coding**
+
+- Windows: the [`VirtualAlloc` reserve/commit
+  model](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc)
+  and Microsoft's [`GetSystemInfo`
+  example](https://learn.microsoft.com/en-us/windows/win32/sysinfo/getting-hardware-information).
+  The probe need not call `VirtualAlloc`; use its documentation to interpret
+  reserve, commit, and first-touch observations rather than treating them as
+  synonyms.
+
+**Optional / after the first attempt**
+
+- Inspect a completed allocate/touch run with [VMMap's official
+  documentation](https://learn.microsoft.com/en-us/sysinternals/downloads/vmmap)
+  and [video
+  walkthrough](https://learn.microsoft.com/en-us/shows/defrag-tools/7-vmmap).
+  Reconcile its reserved, committed, and working-set values with your prediction
+  instead of replacing your measurements with screenshots.
 
 ## Build target
 

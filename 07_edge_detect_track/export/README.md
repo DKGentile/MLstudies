@@ -1,5 +1,16 @@
 # Export and Parity Lab
 
+## Prepare
+
+Read the ONNX [intermediate representation](https://onnx.ai/onnx/repo-docs/IR.html),
+[versioning rules](https://onnx.ai/onnx/repo-docs/Versioning.html), and
+[shape-inference limits](https://onnx.ai/onnx/repo-docs/ShapeInference.html), then
+the PyTorch [ONNX exporter contract](https://docs.pytorch.org/docs/stable/onnx.html).
+
+Before export, state input/output names, dtypes, ranks, fixed or dynamic axes,
+opset, preprocessing, and whether outputs are raw or post-NMS. Successful file
+creation proves serialization, not numerical equivalence.
+
 An export is complete only when the exported graph produces acceptable outputs on
 representative inputs.
 
@@ -29,4 +40,3 @@ result “model drift.” First compare the exact tensor entering the model.
 Move the ONNX file—not a desktop `.engine`—to another target. Build and benchmark a
 new engine on that target using its installed TensorRT. Record the exact `trtexec`
 command and logs.
-

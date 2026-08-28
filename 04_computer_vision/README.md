@@ -34,6 +34,19 @@ python -m pytest 04_computer_vision/tests/test_conv_pool.py -q
 
 On bash/zsh, prefix the command with `RUN_CV_EXERCISES=1`.
 
+## Preparation at the point of use
+
+Use the **core** source before the corresponding code and the **extension** only
+after a first implementation. The external APIs are useful as independent
+contracts and oracles; the local docstrings and tests decide this chapter's exact
+behavior.
+
+| Stage | Core before coding | Ready-to-code check | Extension after first attempt |
+|---|---|---|---|
+| NumPy convolution and pooling | Read the “Convolutional Layer,” “Pooling Layer,” and output-size portions of Stanford's [CS231n convolutional-network notes](https://cs231n.github.io/convolutional-networks/). | Derive `H_out` and `W_out` from input, kernel, padding, and stride. State the filter shape for NCHW data, and explain why the operation here is cross-correlation. | Treat PyTorch's [`conv2d`](https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.conv2d.html), [`max_pool2d`](https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.max_pool2d.html), and [`avg_pool2d`](https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.avg_pool2d.html) as comparison oracles on small random cases. Do not replace the required NumPy implementation with them. |
+| CIFAR-10 training | Complete the loop preparation in the [CIFAR-10 lab](cifar10/README.md) immediately before editing its TODOs. | Explain the training/evaluation mode difference, gradient lifecycle, whole-dataset metric aggregation, and checkpoint criterion. | After one correct epoch and a tiny-subset overfit, use the lab's reproducibility and experiment resources to interpret curves. |
+| Stanford checkpoint | Read each official assignment page only when you reach its listed section in [CS231N_CHECKPOINT.md](CS231N_CHECKPOINT.md). | Write down tensor shapes, the slowest avoidable loop, and the expected gradient-check target before each section. | Compare controlled results with the repository-native implementation; do not move solution code between the two projects. |
+
 ## Part 1: convolution and pooling primitives
 
 Work in `computer_vision/conv_pool.py`. This chapter uses these conventions:
@@ -113,8 +126,3 @@ You are done when:
 The CS231n checkpoint is part of the original 26-week curriculum. If time is short,
 finish the repository-native tests and PyTorch experiment first, then slip the
 calendar rather than copying assignment answers.
-
-Reference reading from the curriculum:
-
-- [CS231n convolutional-network notes](https://cs231n.github.io/convolutional-networks/)
-- [CS231n transfer-learning notes](https://cs231n.github.io/transfer-learning/)

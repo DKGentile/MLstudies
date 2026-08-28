@@ -10,9 +10,33 @@
   State whether intervals are open or closed before deciding if touching means
   overlap.
 
-Read the [`std::priority_queue`](https://en.cppreference.com/w/cpp/container/priority_queue)
-reference once. Practice using both the default max heap and a comparator-based
-min heap without copying syntax.
+## Prepare
+
+Required reading, about 25-35 minutes total:
+
+- Read Cornell CS 2110's [Stacks and Queues](https://www.cs.cornell.edu/courses/cs2110/2025fa/lectures/lec15/)
+  through the LIFO/FIFO abstractions, then Microsoft's
+  [`std::stack` reference](https://learn.microsoft.com/en-us/cpp/standard-library/stack-class?view=msvc-170).
+  Connect restricted access to the meaning of an unresolved item at the top.
+- Read Microsoft's
+  [`std::priority_queue` reference](https://learn.microsoft.com/en-us/cpp/standard-library/priority-queue-class?view=msvc-170).
+  Focus on `top`, comparator orientation, and the costs of access, insertion, and
+  removal. Practice declaring a min-oriented queue without copying an answer.
+- Read the official statements and built-in hints for
+  [Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) and
+  [Merge Intervals](https://leetcode.com/problems/merge-intervals/).
+  Write what remains unresolved on the stack, then specify the interval endpoint
+  convention and a sort key before opening a hint.
+
+Optional video: [MIT 6.006 Lecture 4: Heaps and Heap Sort](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-4-heaps-and-heap-sort/).
+
+Before coding, verify that you can:
+
+- state what every item remaining on a stack is waiting for;
+- choose which extreme belongs at a heap root and maintain a size-`k` invariant;
+- justify why retaining only `k` candidates can beat sorting all `n`; and
+- state the interval endpoint convention, overlap rule, and sort key that makes
+  a one-pass sweep valid.
 
 ## Week plan
 
@@ -31,4 +55,3 @@ min heap without copying syntax.
 2. Why can a heap of size `k` be better than sorting all `n` elements?
 3. Which sort key makes your interval sweep correct?
 4. Does `[1, 4]` overlap `[4, 6]` under this module's contract?
-

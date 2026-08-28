@@ -57,6 +57,28 @@ time, rerun the smallest relevant test, then run the whole chapter.
 The tests define edge cases and shape contracts, but they intentionally do not
 show implementations. Search each starter file for `TODO`.
 
+## Preparation at the point of use
+
+Do not read this table front to back. **Core before coding** is the minimum
+conceptual preparation for that stop. **Extension after first attempt** is for
+checking your mental model after you have written a derivation or produced a
+specific failing test. External examples explain concepts; the local docstrings
+and tests remain the implementation contract.
+
+| Stop | Core before coding | Ready-to-code check | Extension after first attempt |
+|---:|---|---|---|
+| 1 | NumPy's [broadcasting rules](https://numpy.org/doc/stable/user/basics.broadcasting.html) and [indexing rules](https://numpy.org/doc/stable/user/basics.indexing.html) | For an `(n, d)` matrix, predict the shapes of column means and standard deviations. State when indexing returns a view versus a copy. | Read the official [`sliding_window_view` contract](https://numpy.org/doc/stable/reference/generated/numpy.lib.stride_tricks.sliding_window_view.html), then explain why this exercise must return an independent writable array. |
+| 2 | The linear-regression chapter of Stanford's [CS229 notes](https://cs229.stanford.edu/main_notes.pdf) | Write the scalar and matrix forms of `0.5 * mean((Xw - y)^2)`, annotate every shape, and derive the gradient before opening the starter. | Use the [CS231n optimization note](https://cs231n.github.io/optimization-1/) to diagnose learning-rate or loss-history behavior, not to replace your derivation. |
+| 3 | The classification and logistic-regression chapter of the same [CS229 notes](https://cs229.stanford.edu/main_notes.pdf) | Explain the Bernoulli model behind binary cross-entropy, derive the batch gradient, and identify where naive exponentials or logarithms can overflow. | Compare your explanation with Google's official [logistic-regression module](https://developers.google.com/machine-learning/crash-course/logistic-regression) after your first implementation. |
+| 4 | CS231n's [gradient-checking guidance](https://cs231n.github.io/neural-networks-3/#gradcheck) | Write the central-difference formula and explain why absolute error alone is misleading near different gradient scales. | Deliberately omit a batch average or flip a sign, then predict how the relative error should change before running the failure clinic. |
+| 5 | CS231n's [regularization discussion](https://cs231n.github.io/neural-networks-2/) and Google's [train/validation/test split lesson](https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets) | Explain why an intercept is normally excluded from L2, distinguish bias from variance, and state why model choices must not be made on the test set. | Run the polynomial resampling lab, then revisit the readings to account for the observed coefficient magnitudes and train/validation gap. |
+| 6 | CS231n's [backpropagation note](https://cs231n.github.io/optimization-2/) and [two-layer case study](https://cs231n.github.io/neural-networks-case-study/) | Annotate the shapes of both affine layers, list the values needed by backward, and derive the ReLU mask and softmax-logit gradient. | After local gradient checks pass, compare the design with Stanford's [official Assignment 1](https://cs231n.github.io/assignments2026/assignment1/) without copying implementations between them. |
+
+For each row, close the source and answer the ready-to-code check in your own
+notes. Then enable only the smallest relevant test. Return to the extension only
+when you have a concrete result to explain: a failed assertion, a gradient
+mismatch, or a loss curve.
+
 ## Working method
 
 For each loss function, do these in order:
@@ -68,13 +90,6 @@ For each loss function, do these in order:
 4. Implement the forward value first.
 5. Implement the analytic gradient and compare it with finite differences.
 6. Only then add the optimization loop.
-
-Useful references from the source curriculum:
-
-- [CS229 course materials](https://cs229.stanford.edu/)
-- [CS231n Python/NumPy tutorial](https://cs231n.github.io/python-numpy-tutorial/)
-- [CS231n optimization notes](https://cs231n.github.io/optimization-1/)
-- [CS231n neural-network notes](https://cs231n.github.io/neural-networks-case-study/)
 
 ## Labs and reflection prompts
 

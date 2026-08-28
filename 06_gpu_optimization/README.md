@@ -15,6 +15,20 @@ the hypothesis.
 | 04 Profiling | Completed worksheet and saved reports | Which metric falsifies your first hypothesis? |
 | 05 Cross-GPU report | GTX 1080 and RTX 5060 Ti result rows | Which architectural difference plausibly explains the gap? |
 
+## Resource route
+
+| Stage | Read before the experiment | Use it to answer |
+|---|---|---|
+| 01 Coalescing | CUDA [Best Practices Guide](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/), especially bandwidth and coalesced access | Which addresses one warp requests and why effective bandwidth differs from peak bandwidth |
+| 02 Tiled blur | NVIDIA on [shared memory](https://developer.nvidia.com/blog/using-shared-memory-cuda-cc/) and [stencil reuse](https://developer.nvidia.com/blog/finite-difference-methods-cuda-cc-part-1/) | What the tile and halo reuse, and exactly which dependency the barrier protects |
+| 03 Privatized histogram | NVIDIA's [shared-atomic histogram study](https://developer.nvidia.com/blog/gpu-pro-tip-fast-histograms-using-shared-atomics-maxwell/) | How privatization changes global atomics and why architecture/input distribution affect the result |
+| 04 Profiling | [Nsight Compute Profiling Guide](https://docs.nvidia.com/nsight-compute/ProfilingGuide/) and [Nsight Systems User Guide](https://docs.nvidia.com/nsight-systems/UserGuide/) | Which tool answers a kernel question versus an end-to-end timeline question |
+| 05 Cross-GPU report | NVIDIA [Pascal](https://docs.nvidia.com/cuda/pascal-tuning-guide/) and [Blackwell](https://docs.nvidia.com/cuda/blackwell-tuning-guide/) tuning guides | Which measured difference has a plausible architectural mechanism |
+
+Extension after the first profile: NVIDIA's [roofline analysis with Nsight Compute](https://developer.nvidia.com/blog/accelerating-hpc-applications-with-nsight-compute-roofline-analysis/).
+Use it to classify a workload, not to replace examination of warp stalls, traffic,
+and synchronization.
+
 The optimized blur and histogram kernels contain `TODO(learner)` regions. The
 repository supplies correctness references and naive baselines, not completed
 optimized kernels.

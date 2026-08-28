@@ -1,5 +1,13 @@
 # Capstone Walkthrough Drill
 
+## Prepare
+
+Use the [Model Cards paper](https://arxiv.org/abs/1810.03993) to check that your
+story includes intended use, evaluation conditions, limitations, and failure
+slices. Use the [artifact evaluation criteria](https://sigsim.acm.org/conf/pads/2024/blog/artifact-evaluation/)
+to check that commands and artifacts support the claims. Then close both sources
+and speak from your own repository.
+
 Practice three versions: 90 seconds, 5 minutes, and 15 minutes.
 
 ## Narrative spine
@@ -24,4 +32,3 @@ Practice three versions: 90 seconds, 5 minutes, and 15 minutes.
 - What evidence shows FP16 did not materially change outputs?
 - What would fail first with four video streams?
 - What did you intentionally leave unfinished?
-

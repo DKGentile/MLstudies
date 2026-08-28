@@ -1,5 +1,16 @@
 # Stage 01: Coalescing experiment
 
+## Prepare
+
+Read the CUDA Best Practices Guide sections on
+[bandwidth](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/#bandwidth) and
+[coalesced global-memory access](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/#coalesced-access-to-global-memory).
+
+Before running the code, write the byte address—not merely the `(x, y)`
+coordinate—requested by lanes 0 through 7 in each mapping. Also write the useful
+bytes divided by elapsed time formula you will call effective bandwidth. The
+profile should test that prediction, not substitute for making it.
+
 Both supplied kernels perform the same copy-scale operation and produce the same
 row-major output. The row launch uses `256 x 1` blocks; the column launch uses
 `1 x 256` blocks. This makes adjacent lanes vary `x` in one kernel and `y` in

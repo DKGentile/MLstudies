@@ -1,5 +1,17 @@
 # TensorRT C++ Inference Path
 
+## Prepare
+
+Read TensorRT's [inference-library documentation](https://docs.nvidia.com/deeplearning/tensorrt/latest/inference-library/),
+[engine compatibility rules](https://docs.nvidia.com/deeplearning/tensorrt/latest/inference-library/engine-compatibility.html),
+and [benchmarking guidance](https://docs.nvidia.com/deeplearning/tensorrt/latest/performance/benchmarking.html).
+For reduced precision, also read its [accuracy considerations](https://docs.nvidia.com/deeplearning/tensorrt/latest/inference-library/accuracy-considerations.html).
+
+Before coding, draw ownership and lifetime for the engine, execution context,
+stream, device buffers, pinned host buffers, and tensor shapes. Mark every
+operation ordered by the stream and every host synchronization. The exact API
+surface is version-specific; those invariants are not.
+
 Build this only after Python/ONNX correctness is established. TensorRT APIs differ
 substantially between the Nano's JetPack-provided version and a current desktop
 release, so keep target adapters separate behind one small interface.
@@ -36,4 +48,3 @@ the local build preset, not in committed source.
 - Which TensorRT tensors are dynamic, and where are their shapes set?
 - Who owns each pointer, and on which device/stream is it valid?
 - Does postprocessing dominate after FP16 makes inference faster?
-

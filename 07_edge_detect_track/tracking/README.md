@@ -1,5 +1,22 @@
 # Tracking Extensions: From IoU Baseline to SORT and ByteTrack
 
+## Prepare
+
+Use this order so the papers explain observed failures rather than becoming code
+templates:
+
+1. Implement and break the local IoU baseline on synthetic sequences.
+2. Read MIT's [Kalman-filter notes](https://ocw.mit.edu/courses/2-160-identification-estimation-and-learning-spring-2006/resources/lecture_5/)
+   and write your state, transition, observation, and uncertainty assumptions.
+3. Read SciPy's [`linear_sum_assignment`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html)
+   contract; construct the cost matrix and gating rules yourself.
+4. Compare the result with the original [SORT paper](https://arxiv.org/abs/1602.00763).
+5. Only after low-confidence detections cause visible fragmentation, read
+   [ByteTrack](https://arxiv.org/abs/2110.06864).
+
+Extension after you have labeled identities: the [HOTA paper](https://arxiv.org/abs/2009.07736)
+separates detection, association, and localization quality.
+
 Complete the simple IoU tracker first. Its failures make the extra machinery in
 SORT easier to justify.
 
@@ -37,8 +54,8 @@ and manage `age`, `hits`, and `missed` state. Do not display tentative tracks un
 they reach a documented hit threshold. Build three synthetic sequences: crossing
 objects, short occlusion, and a large camera jump.
 
-Read the original [SORT paper](https://arxiv.org/abs/1602.00763) after your baseline
-fails those cases, not before.
+Revisit the original SORT paper after your baseline fails those cases and list
+which state and lifecycle choices in your implementation differ.
 
 ## Lab 4 — ByteTrack-style second association
 
@@ -48,8 +65,7 @@ against low-confidence detections. Measure whether this reduces fragmentation an
 whether it increases false continuation on your validation sequences.
 
 The goal is not to claim a faithful ByteTrack reproduction from this short lab.
-Compare your design to the [ByteTrack paper](https://arxiv.org/abs/2110.06864) and
-name every simplification.
+Compare your design to the paper and name every simplification.
 
 ## Evaluate tracking, not only detection
 
@@ -57,4 +73,3 @@ Label a small but representative sequence with persistent object identities. Rep
 at least track recall, ID switches, and fragmentation count; optionally use a
 standard evaluator for IDF1/HOTA. Show per-sequence results and failure clips.
 Detection mAP alone cannot establish tracker quality.
-

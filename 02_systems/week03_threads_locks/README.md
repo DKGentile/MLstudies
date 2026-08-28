@@ -1,7 +1,41 @@
 # Week 3 lab: Threads, locks, and condition variables
 
-Read OSTEP chapters 26-29. Draw interleavings. "It usually runs in this order"
-is not a synchronization argument.
+## Prepare
+
+**Required concepts**
+
+- Read OSTEP Chapters [26: Concurrency--An
+  Introduction](https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf), [27:
+  Thread API](https://pages.cs.wisc.edu/~remzi/OSTEP/threads-api.pdf), [28:
+  Locks](https://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf), [29:
+  Lock-Based Concurrent Data
+  Structures](https://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks-usage.pdf),
+  and **[30: Condition
+  Variables](https://pages.cs.wisc.edu/~remzi/OSTEP/threads-cv.pdf)**. Chapter 30
+  is required: it supplies the wait-condition model used by this lab.
+- Read C++ Core Guidelines [CP.42: do not wait without a
+  condition](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#cp42-dont-wait-without-a-condition).
+  For capacity 1, draw the queue state, each wait predicate, and every state
+  transition that can make a predicate true. "It usually runs in this order" is
+  not a synchronization argument.
+
+**API references while coding**
+
+- Microsoft's [`<condition_variable>`
+  reference](https://learn.microsoft.com/en-us/cpp/standard-library/condition-variable?view=msvc-170)
+  is the readable API guide. Use the C++ working draft for authoritative
+  [condition-variable ordering](https://eel.is/c++draft/thread.condition) and
+  [happens-before/data-race rules](https://eel.is/c++draft/intro.races).
+
+**Optional / after the first attempt**
+
+- Watch CppCon's [Back to Basics: C++
+  Concurrency](https://www.youtube.com/watch?v=8rEGu20Uw4g) if you want a second
+  treatment of races, mutexes, and atomics before the recall drill.
+- After the ordinary tests pass, use Clang's [ThreadSanitizer
+  guide](https://clang.llvm.org/docs/ThreadSanitizer.html) for Experiment 5.
+  Record the exercised workload: a clean run is evidence about those executions,
+  not a proof that no race exists.
 
 ## Build target
 
@@ -48,4 +82,3 @@ explains when an embedded perception pipeline might choose differently.
 - you can point to the invariant protected by the mutex;
 - you can explain why checking `empty()` and later calling `pop()` under separate
   locks would be a time-of-check/time-of-use bug.
-

@@ -1,5 +1,16 @@
 # Stage 02: Tile a box blur
 
+## Prepare
+
+Read NVIDIA's [shared-memory article](https://developer.nvidia.com/blog/using-shared-memory-cuda-cc/)
+and the neighborhood/halo discussion in its
+[finite-difference stencil article](https://developer.nvidia.com/blog/finite-difference-methods-cuda-cc-part-1/).
+
+Before coding, draw one output block, its radius-2 halo, and the larger shared
+tile. Calculate the number of output elements, tile elements, and naive input
+requests. Then state the barrier invariant: no thread may consume the shared tile
+until all cooperative loads needed by any active output have completed.
+
 The file contains a complete CPU reference and naive global-memory GPU baseline.
 Implement `tiled_blur_kernel` without changing those references.
 
@@ -31,4 +42,3 @@ and `33 x 9`; only then use the default `1921 x 1081`.
 After correctness passes, capture naive and tiled profiles using the same shape.
 Do not call the kernel faster merely because theoretical occupancy is higher;
 correlate time with memory-workload and scheduler evidence.
-

@@ -5,6 +5,14 @@ system. The device has constrained GPU memory, intermittent connectivity, and a
 requirement to emit an alert within 150 ms at p95. Operators need short evidence
 clips, but raw video should not normally leave the device.
 
+## Prepare
+
+Before attempting the prompt, review Stanford's [CS329S ML systems materials](https://stanford-cs329s.github.io/syllabus.html)
+for the lifecycle from requirements and data through deployment and monitoring,
+and Google SRE's [Reliable Product Launches](https://sre.google/sre-book/reliable-product-launches/)
+for canary, rollback, capacity, and operational readiness. Extract questions and
+mechanisms; the design must still be derived from this prompt's constraints.
+
 ## Clarify first
 
 Ask about object classes, camera resolution/FPS, alert volume, acceptable misses,
@@ -31,4 +39,3 @@ meaning of the 150 ms boundary.
 
 Score with [../mock_scorecard.md](../mock_scorecard.md), emphasizing explicit
 tradeoffs and observability over naming products.
-

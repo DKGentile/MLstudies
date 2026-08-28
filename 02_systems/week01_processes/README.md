@@ -1,7 +1,40 @@
 # Week 1 lab: Processes are isolated resource containers
 
-Read OSTEP chapters 4-5 (process abstraction and process API). Stop when you can
-draw the parent and child state across create, replace/exec, exit, and wait.
+## Prepare
+
+**Required concepts**
+
+- Read OSTEP [Chapter 4: The Abstraction--The
+  Process](https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf) and
+  [Chapter 5: Process
+  API](https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-api.pdf). Before coding, draw
+  parent and child state across create, replace/exec, exit, and wait. Label the
+  owner of each address space and OS resource.
+- Read Microsoft's [redirected child-I/O
+  walkthrough](https://learn.microsoft.com/en-us/windows/win32/procthread/creating-a-child-process-with-redirected-input-and-output),
+  [anonymous-pipe
+  operations](https://learn.microsoft.com/en-us/windows/win32/ipc/anonymous-pipe-operations),
+  and [pipe-handle
+  inheritance](https://learn.microsoft.com/en-us/windows/win32/ipc/pipe-handle-inheritance).
+  Predict what Experiment 5 does if either pipe fills or the parent retains an
+  extra child-side write handle.
+
+**API references while coding**
+
+- Windows: [creating
+  processes](https://learn.microsoft.com/en-us/windows/win32/procthread/creating-processes),
+  [`CreateProcessW`](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw),
+  [`WaitForSingleObject`](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject),
+  and [MSVC command-line argument
+  rules](https://learn.microsoft.com/en-us/cpp/cpp/main-function-command-line-args?view=msvc-170).
+  Use these to check ownership, wait/status behavior, and exact argument
+  boundaries; do not copy the walkthrough as a finished runner.
+
+**Optional / after the first attempt**
+
+- Use the official [Task Manager and Resource Monitor
+  walkthrough](https://learn.microsoft.com/en-us/shows/defrag-tools/12-taskmgr-resmon)
+  before Experiments 3-4 if the Windows process-state views are unfamiliar.
 
 ## Build target
 
@@ -47,4 +80,3 @@ and failure containment.
 - An argument containing spaces and shell punctuation arrives as one argument.
 - You can explain the difference between creating a process and replacing its
   program image.
-

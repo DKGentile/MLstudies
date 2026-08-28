@@ -26,6 +26,28 @@ decode → resize/normalize → detector → confidence/NMS → detections
 Measure decode, preprocess, inference, postprocess, tracking, and rendering
 separately. “Model FPS” and “camera-to-output FPS” answer different questions.
 
+## Prepare by milestone
+
+These are assigned sources, not a background bibliography. Read the core item
+before the named work; use papers marked "after baseline" only once your simpler
+implementation has exposed the failure they address.
+
+| Week | Core source | What it prepares you to produce |
+|---:|---|---|
+| 10 | [Datasheets for Datasets](https://arxiv.org/abs/1803.09010), Ultralytics [detection dataset format](https://docs.ultralytics.com/datasets/detect), and scikit-learn [`GroupShuffleSplit`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupShuffleSplit.html) | Provenance/license record, valid labels, and a split whose unit of independence is explicit |
+| 11 | Ultralytics [training mode](https://docs.ultralytics.com/modes/train/) and PyTorch [reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html) | Versioned baseline configuration with honest limits on reproducibility |
+| 12 | PyTorch [transfer-learning tutorial](https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html) | Tiny-subset overfit check and first controlled training run |
+| 13 | Ultralytics [validation mode](https://docs.ultralytics.com/modes/val/) and COCO's [detection evaluation page](https://cocodataset.org/#detection-eval) | Per-class metrics with named IoU and score rules |
+| 14 | The original [TIDE error-analysis paper](https://arxiv.org/abs/2008.08115) | False-positive/negative categories instead of an anecdotal image gallery |
+| 15 | COCO's [official evaluator contract](https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocotools/cocoeval.py) | Score ordering, precision/recall, interpolation, AP, and threshold tradeoffs |
+| 16 | ONNX [IR](https://onnx.ai/onnx/repo-docs/IR.html), [versioning](https://onnx.ai/onnx/repo-docs/Versioning.html), and PyTorch's [ONNX exporter](https://docs.pytorch.org/docs/stable/onnx.html) | Export manifest plus pre-NMS numerical parity on identical tensors |
+| 17 | [SORT](https://arxiv.org/abs/1602.00763), MIT [Kalman-filter notes](https://ocw.mit.edu/courses/2-160-identification-estimation-and-learning-spring-2006/resources/lecture_5/), and SciPy [`linear_sum_assignment`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html) | Motion state, gated global assignment, and explicit track lifecycle |
+| 18 | TensorRT [benchmarking guidance](https://docs.nvidia.com/deeplearning/tensorrt/latest/performance/benchmarking.html) and [Nsight Systems](https://docs.nvidia.com/nsight-systems/UserGuide/) | Warmed stage-level latency distributions and an end-to-end timeline |
+| 19 | [Model Cards](https://arxiv.org/abs/1810.03993), TIDE, and Stanford [CS329S materials](https://stanford-cs329s.github.io/syllabus.html) | Named failure slices, operational limits, and monitoring hypotheses |
+| 20 | TensorRT [accuracy considerations](https://docs.nvidia.com/deeplearning/tensorrt/latest/inference-library/accuracy-considerations.html) and [engine compatibility](https://docs.nvidia.com/deeplearning/tensorrt/latest/inference-library/engine-compatibility.html) | Per-target FP32/FP16 build, parity, memory, and latency evidence |
+| 21 | NVIDIA [JetPack archive](https://developer.nvidia.com/embedded/jetpack-archive) and archived Nano [power-management guide](https://docs.nvidia.com/jetson/archives/l4t-archived/l4t-3275/Tegra%20Linux%20Driver%20Package%20Development%20Guide/power_management_nano.html) | Immutable target inventory and controlled power/thermal conditions |
+| 22 | [Model Cards](https://arxiv.org/abs/1810.03993) and ACM-style [artifact evaluation criteria](https://sigsim.acm.org/conf/pads/2024/blog/artifact-evaluation/) | Claims, limitations, commands, and artifacts another engineer can audit |
+
 ## Milestones and gates
 
 | Week | Required work | Evidence gate |

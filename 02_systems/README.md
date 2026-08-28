@@ -29,7 +29,7 @@ behind `#if defined(_WIN32)` / POSIX branches, not in duplicated public APIs.
 |---|---|---|
 | 1 | OSTEP processes, chapters 4-5; spawn, capture, and wait | portable child-process runner plus process tree notes |
 | 2 | address spaces/VM, chapters 13-15; allocate and touch pages | address/page probe with before/after memory observations |
-| 3 | threads and locks, chapters 26-29; condition variables | bounded blocking queue that passes concurrency contracts |
+| 3 | threads and locks, chapters 26-30; condition variables | bounded blocking queue that passes concurrency contracts |
 | 4 | review and integration | bounded multi-worker frame pipeline plus failure analysis |
 
 ## Build and test

@@ -1,5 +1,16 @@
 # Python Inference Pipeline
 
+## Prepare
+
+Read OpenCV's [geometric image transformations](https://docs.opencv.org/4.x/da/d54/group__imgproc__transform.html)
+for coordinate conventions and interpolation, then review the chosen detector's
+documented input/output contract. Keep the local tests—not a framework helper—as
+the specification for `letterbox` and inverse box mapping.
+
+Before coding, write the affine mapping from original coordinates to resized,
+padded coordinates and its inverse. Record scale and both padding offsets; test
+odd padding and non-square images before attaching a model.
+
 Use the Python path to establish correctness and stage-level timings before taking
 on TensorRT C++ integration.
 
@@ -25,4 +36,3 @@ Your pipeline loop should:
 
 Start with a prerecorded video so results are reproducible. Add live camera input
 only after the file path works.
-

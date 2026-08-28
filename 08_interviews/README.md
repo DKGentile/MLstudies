@@ -8,6 +8,23 @@ This chapter runs in parallel with the capstone. Start applications when the
 capstone contains reproducible accuracy and latency numbers—not when the calendar
 reaches a particular date.
 
+## Weekly preparation route
+
+The preparation is deliberately short. Read the named source, then rehearse with
+your own code and artifacts; reading does not count as interview practice.
+
+| Week | Core source | Rehearsal focus |
+|---:|---|---|
+| 18 | Princeton [Algorithms lectures](https://algs4.cs.princeton.edu/lectures/) and MIT [DFS/topological sort](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/lecture-10-depth-first-search/) | State an invariant and complexity before timed graph/heap/union-find code |
+| 19 | Stanford [CS329S ML systems materials](https://stanford-cs329s.github.io/syllabus.html) | Requirements, data, deployment, monitoring, and feedback loops for edge inference |
+| 20 | TensorRT [benchmarking](https://docs.nvidia.com/deeplearning/tensorrt/latest/performance/benchmarking.html) and [accuracy considerations](https://docs.nvidia.com/deeplearning/tensorrt/latest/inference-library/accuracy-considerations.html) | Defend timing boundaries, synchronization, and FP16 evidence |
+| 21 | Google SRE: [Reliable Product Launches](https://sre.google/sre-book/reliable-product-launches/) | Canary, rollback, kill switches, and legacy-target deployment risk |
+| 22 | Original [Model Cards paper](https://arxiv.org/abs/1810.03993) | Audit every resume/model claim against an artifact and named limitation |
+| 23 | Google SRE: [Effective Troubleshooting](https://sre.google/sre-book/effective-troubleshooting/), [Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/), and [Postmortem Culture](https://sre.google/sre-book/postmortem-culture/) | Diagnose a regression using boundaries, distributions, causal tests, rollback, and prevention |
+| 24 | CUDA [Best Practices](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/) and Nsight Compute [Profiling Guide](https://docs.nvidia.com/nsight-compute/ProfilingGuide/) | Re-derive one optimization and defend the profiler evidence |
+| 25 | ACM-style [artifact evaluation criteria](https://sigsim.acm.org/conf/pads/2024/blog/artifact-evaluation/) | Ten-minute walkthrough centered on artifacts another engineer can exercise |
+| 26 | NeurIPS [paper checklist guidelines](https://neurips.cc/public/guides/PaperChecklist) | Final audit of claims, assumptions, splits, run counts, environment, uncertainty, and limitations |
+
 ## Weekly loop
 
 - Five 25–35 minute coding sessions from [coding_prompts.md](coding_prompts.md) or
@@ -40,4 +57,3 @@ objects, actions, permissions, failure recovery, and evaluation—not vendor jar
 
 If a gate is false, keep applying selectively only when you can describe the gap
 truthfully. Do not fabricate certainty or performance.
-

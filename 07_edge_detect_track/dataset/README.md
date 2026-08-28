@@ -1,5 +1,21 @@
 # Dataset Audit Lab
 
+## Prepare
+
+Required before choosing or splitting data:
+
+- Read the question categories in [Datasheets for Datasets](https://arxiv.org/abs/1803.09010).
+  Use them to record provenance, collection conditions, intended use, license,
+  and known gaps; do not fill the report with guessed answers.
+- Read the Ultralytics [detection dataset format](https://docs.ultralytics.com/datasets/detect)
+  for the exact class and normalized `xywh` label contract.
+- Read the contract for scikit-learn's [`GroupShuffleSplit`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupShuffleSplit.html).
+  The important idea is group-level independence, not whether you use that class.
+
+Before coding, name the real independent unit in your data: video, session,
+camera, site, subject, or something else. A random frame split is not defensible
+when adjacent frames show effectively the same event.
+
 Do this before training. A detector can produce plausible curves while learning a
 duplicate-heavy or leaked split.
 

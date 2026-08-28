@@ -45,7 +45,48 @@ $env:RUN_TORCH_SMOKE = "1"
 python -m pytest 04_computer_vision/tests/test_cifar_entrypoint.py -q
 ```
 
-## 3. Implement the learning loops
+## 3. Prepare for the learning loops
+
+### Core before coding
+
+Read PyTorch's official [optimization
+tutorial](https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html)
+through its train and test loops, then inspect the framework contracts for
+[`Module.train`](https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.train),
+[`Module.eval`](https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.eval),
+and [`torch.no_grad`](https://docs.pytorch.org/docs/stable/generated/torch.no_grad.html).
+The official [CIFAR-10 classifier
+tutorial](https://docs.pytorch.org/tutorials/beginner/blitz/cifar10_tutorial)
+shows the same lifecycle in an image-classification setting.
+
+Before editing a TODO, close those pages and write the lifecycle of one batch in
+words. Your explanation should account for all of these questions:
+
+- Why are gradients cleared before `backward`, and what would accumulate if they
+  were not?
+- Which operations belong only in training, and which still belong in evaluation?
+- Why are both evaluation mode and disabled gradient tracking needed even though
+  neither calls the optimizer?
+- If the final batch is smaller, why can averaging per-batch mean losses give the
+  wrong whole-dataset mean?
+- Which validation quantity selects the best checkpoint, and why must the test set
+  not make that choice?
+
+The tutorials demonstrate framework mechanics, not this starter's answer. The
+local function signatures, sample-weighted metrics, return values, CLI behavior,
+and tests remain authoritative.
+
+### Extension after the first attempt
+
+After one synthetic batch works, use PyTorch's [reproducibility
+note](https://docs.pytorch.org/docs/stable/notes/randomness.html) to identify the
+sources of variation you can and cannot control. After checkpointing works, compare
+it with the official [saving/loading
+guide](https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html).
+Use the creators' [CIFAR-10 page](https://www.cs.toronto.edu/~kriz/cifar.html) for
+dataset provenance rather than a third-party summary.
+
+## 4. Implement the learning loops
 
 Fill these functions in `train.py`:
 
@@ -62,7 +103,7 @@ Recommended debugging order:
 3. deliberately overfit 128 images;
 4. only then run the complete train/validation split.
 
-## 4. Acquire data explicitly
+## 5. Acquire data explicitly
 
 The script never downloads implicitly. The first run must opt in:
 
@@ -79,7 +120,7 @@ python 04_computer_vision/cifar10/train.py --train --epochs 15 --device auto
 Use `--help` for every option. Data defaults to `cifar10/data/` and generated
 artifacts to `cifar10/artifacts/`; both directories are ignored by Git.
 
-## 5. Controlled experiments
+## 6. Controlled experiments
 
 Run a baseline, then change one factor at a time. Good first comparisons are:
 
