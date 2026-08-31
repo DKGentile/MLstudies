@@ -65,8 +65,53 @@ explicit failure rather than an endless run.
    queue occupancy (temporary instrumentation is allowed).
 4. Remove a wait predicate, run repeatedly, and explain any failure or why the
    bug remains possible even when not observed. Restore it.
-5. Run ThreadSanitizer on Linux/Clang or GCC if available. Record tool/version
-   and result; do not claim absence of a reported race proves correctness.
+5. Run ThreadSanitizer on Linux/WSL with Clang or GCC using the intentional race
+   clinic below. Record tool/version and result; do not claim absence of a
+   reported race proves correctness.
+
+## Intentional data-race clinic (opt in)
+
+`debugging/racy_metrics.cpp` deliberately lets several workers update shared
+pipeline counters without synchronization. It is not part of the default build,
+is not a CTest, and may print the expected totals by accident. A plausible number
+does not create a happens-before edge.
+
+First reproduce it in a debugger-capable build:
+
+```text
+cmake --preset debug-clinics
+cmake --build --preset debug-clinics
+```
+
+On Windows run `build\debug-clinics\Debug\systems_race_clinic.exe`. Use a
+breakpoint in `record_frame_with_intentional_race`, inspect all worker threads
+and their call stacks, and identify the shared locations before changing code.
+MSVC does not provide ThreadSanitizer.
+
+The diagnostic route is Linux/WSL with GCC or Clang:
+
+```text
+cmake --preset tsan
+cmake --build --preset tsan
+TSAN_OPTIONS=halt_on_error=1 ./build/tsan/systems_race_clinic
+```
+
+If WSL reports `ThreadSanitizer: unexpected memory mapping` before the program
+starts, retry this one diagnostic process with:
+
+```text
+TSAN_OPTIONS=halt_on_error=1 setarch x86_64 -R ./build/tsan/systems_race_clinic
+```
+
+Record that address randomization was disabled for that run; do not change the
+machine's global ASLR setting.
+
+Capture the report, name both conflicting accesses and the missing
+happens-before relationship, then repair the clinic. Choose a mutex, atomics, or
+per-worker counters plus a post-join reduction deliberately; explain the
+invariant and tradeoff. Rerun the same command and verify that the report is
+gone and the totals are correct. ThreadSanitizer and AddressSanitizer are
+separate configurations and must not be combined.
 
 ## ML systems connection
 
@@ -81,4 +126,7 @@ explains when an embedded perception pipeline might choose differently.
 - close unblocks both kinds of waiter and queued items drain before end-of-stream;
 - you can point to the invariant protected by the mutex;
 - you can explain why checking `empty()` and later calling `pop()` under separate
-  locks would be a time-of-check/time-of-use bug.
+  locks would be a time-of-check/time-of-use bug;
+- given the clinic's ThreadSanitizer report, you can reproduce it, identify the
+  root cause, repair it, rerun the diagnostic, and explain why the repair is
+  synchronized rather than merely less likely to fail.

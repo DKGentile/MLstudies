@@ -18,7 +18,7 @@ Observation that differed from the prediction: ____________________
 
 ## Explanation
 
-Draw or describe the relevant process, address-space, or synchronization state: ____________________
+Draw or describe the relevant process, address-space, synchronization, or TCP/queue state: ____________________
 What the OS/runtime guaranteed: ____________________
 What was merely an implementation detail or one-run observation: ____________________
 

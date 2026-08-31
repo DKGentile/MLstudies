@@ -13,9 +13,38 @@ expected to fail until the corresponding TODO is complete.
 4. Run the smallest relevant test once to see its contract.
 5. Implement only enough to make one new case pass.
 6. Add at least one adversarial test that was not supplied.
-7. Run with warnings/sanitizers or a profiler when the chapter asks for it.
-8. Write the result in the log using evidence: input size, median time, hardware,
+7. For a debugging clinic, reproduce the failure before editing, inspect it with
+   the assigned debugger/sanitizer, and save the first causal diagnostic.
+8. Repair the cause, rerun the same diagnostic configuration, and explain why
+   the report disappeared rather than merely suppressing it.
+9. Write the result in the log using evidence: input size, median time, hardware,
    and software versions.
+
+## Debugger and sanitizer method
+
+Warnings and dynamic diagnostics are learned competencies, not decorative flags.
+Use a debugger to set a breakpoint, step into and over calls, inspect locals and
+program state, read the call stack/backtrace, and inspect threads when concurrency
+is involved. Start from a reproducible input and stop at the earliest state that
+violates an ownership, bounds, or synchronization rule.
+
+For an intentional clinic:
+
+1. build the named opt-in target in its separate diagnostic build directory;
+2. predict the bug class and run it unchanged;
+3. capture the report, first invalid access, allocation/free or conflicting-access
+   stacks, and exact command;
+4. state the root cause in language terms—lifetime, bounds, data race, or another
+   violated contract;
+5. repair the cause without weakening the workload or disabling instrumentation;
+6. rerun the same input and diagnostic; and
+7. explain both why the repair establishes the required invariant and what the
+   clean run does **not** prove.
+
+AddressSanitizer and ThreadSanitizer are normally separate builds/runs. TSan is
+not a native-MSVC route; use the documented Linux/WSL GCC/Clang configuration.
+Intentional bug-clinic targets are opt-in and are never evidence that the normal
+repository build is accidentally broken.
 
 ## How to use the resources
 
@@ -78,3 +107,7 @@ Finish the required tests, the recall drill, and the artifact named in the chapt
 Optional stretch exercises are explicitly labeled. If a hardware issue consumes a
 full planned session, record it and use the CPU/reference path until the scheduled
 hardware-debug block.
+
+Before claiming a C++/systems gate, you must also be able to take an unfamiliar
+debugger or sanitizer report through reproduce → root cause → repair → verified
+rerun without silencing the diagnostic.

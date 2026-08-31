@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import os
 import platform
 import shutil
 import subprocess
@@ -17,24 +18,62 @@ COMMANDS = ("git", "cmake", "ninja", "g++", "clang++", "cl", "nvcc", "nvidia-smi
 PACKAGES = ("numpy", "pytest", "torch", "torchvision", "cv2", "onnx", "onnxruntime")
 
 
+def visual_studio_roots() -> list[Path]:
+    """Return installed VS 2022 products with a native C++ toolset."""
+    roots: list[Path] = []
+    program_files_x86 = Path(
+        os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")
+    )
+    vswhere = program_files_x86 / "Microsoft Visual Studio" / "Installer" / "vswhere.exe"
+    if vswhere.is_file():
+        try:
+            result = subprocess.run(
+                [
+                    str(vswhere),
+                    "-products",
+                    "*",
+                    "-requires",
+                    "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+                    "-version",
+                    "[17.0,18.0)",
+                    "-property",
+                    "installationPath",
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+                timeout=5,
+            )
+            roots.extend(
+                Path(line.strip())
+                for line in result.stdout.splitlines()
+                if line.strip()
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            pass
+
+    for base in (Path(r"C:\Program Files"), program_files_x86):
+        for product in ("BuildTools", "Community", "Professional", "Enterprise"):
+            roots.append(base / "Microsoft Visual Studio" / "2022" / product)
+
+    # Preserve discovery order while removing duplicates and nonexistent roots.
+    return list(dict.fromkeys(root for root in roots if root.is_dir()))
+
+
 def visual_studio_tools() -> dict[str, str]:
-    """Find command-line tools bundled with Visual Studio Build Tools.
+    """Find command-line tools bundled with an installed Visual Studio product.
 
     MSVC is intentionally absent from a normal PowerShell PATH. Discovering it
     here distinguishes "not installed" from "open a Developer shell".
     """
-    roots = [
-        Path(r"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools"),
-        Path(r"C:\Program Files\Microsoft Visual Studio\2022\BuildTools"),
-    ]
-    for root in roots:
-        if not root.is_dir():
-            continue
+    for root in visual_studio_roots():
         versions_root = root / "VC" / "Tools" / "MSVC"
         versions = sorted(
             (path for path in versions_root.glob("*") if path.is_dir()), reverse=True
         )
         compiler = versions[0] / "bin" / "Hostx64" / "x64" / "cl.exe" if versions else None
+        if compiler is None or not compiler.is_file():
+            continue
         candidates = {
             "cl": compiler,
             "cmake": root
@@ -127,7 +166,7 @@ def collect() -> dict[str, Any]:
         },
     }
     if VS_TOOLS:
-        report["visual_studio_build_tools"] = {
+        report["visual_studio_toolchain"] = {
             "developer_shell": VS_TOOLS.get("developer_shell"),
             "note": "MSVC tools require a Visual Studio Developer shell in the terminal",
         }
@@ -167,9 +206,9 @@ def print_human(report: dict[str, Any]) -> None:
         print("\nPyTorch CUDA")
         for key, value in runtime.items():
             print(f"  {key:<15} {value}")
-    visual_studio = report.get("visual_studio_build_tools")
+    visual_studio = report.get("visual_studio_toolchain")
     if visual_studio:
-        print("\nVisual Studio Build Tools")
+        print("\nVisual Studio toolchain")
         print(f"  developer shell {visual_studio['developer_shell']}")
         print(f"  note            {visual_studio['note']}")
     print("\nMissing optional tools are expected until their chapter.")

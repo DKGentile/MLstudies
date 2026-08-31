@@ -12,6 +12,13 @@ stream, device buffers, pinned host buffers, and tensor shapes. Mark every
 operation ordered by the stream and every host synchronization. The exact API
 surface is version-specific; those invariants are not.
 
+Use the completed Chapter 01
+[`OwnedBuffer` exercise](../../01_cpp_fluency/modern_cpp_engineering/README.md)
+as the design rehearsal: identify owner versus borrower, delete accidental copy,
+make transfer explicit, and define the valid moved-from state before adapting the
+pattern to CUDA and TensorRT resources. Do not copy a finished wrapper from a
+framework; write and test the version-specific deleter and error paths yourself.
+
 Build this only after Python/ONNX correctness is established. TensorRT APIs differ
 substantially between the Nano's JetPack-provided version and a current desktop
 release, so keep target adapters separate behind one small interface.

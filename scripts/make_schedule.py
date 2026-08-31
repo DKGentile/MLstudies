@@ -26,6 +26,13 @@ def main() -> None:
     parser.add_argument("--start", required=True, type=parse_date)
     args = parser.parse_args()
     manifest = json.loads((ROOT / "course_manifest.json").read_text(encoding="utf-8"))
+    tracks = manifest.get("application_tracks", {})
+    if tracks:
+        print("> Application timing is evidence-based, not a 26-week embargo:")
+        for name in ("A", "B", "C"):
+            if name in tracks:
+                print(f"> - Track {name}: {tracks[name]}")
+        print(">")
     print("| Week | Starts | Focus |")
     print("|---:|---|---|")
     for week in range(1, manifest["weeks"] + 1):
@@ -35,4 +42,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

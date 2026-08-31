@@ -14,6 +14,43 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
+    },
+    {
+      "name": "debug-clinics",
+      "displayName": "Intentional bug clinics (debugger build)",
+      "binaryDir": "${sourceDir}/build/debug-clinics",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "MLSTUDIES_BUILD_BUG_CLINICS": "ON"
+      }
+    },
+    {
+      "name": "asan",
+      "displayName": "Intentional bug clinics (AddressSanitizer)",
+      "binaryDir": "${sourceDir}/build/asan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "MLSTUDIES_BUILD_BUG_CLINICS": "ON",
+        "MLSTUDIES_SANITIZER": "address"
+      }
+    },
+    {
+      "name": "asan-ubsan",
+      "displayName": "Intentional bug clinics (ASan + UBSan, GCC/Clang)",
+      "binaryDir": "${sourceDir}/build/asan-ubsan",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "MLSTUDIES_BUILD_BUG_CLINICS": "ON",
+        "MLSTUDIES_SANITIZER": "address-undefined"
+      }
     }
   ],
   "buildPresets": [
@@ -21,6 +58,38 @@
       "name": "default",
       "configurePreset": "default",
       "configuration": "Debug"
+    },
+    {
+      "name": "debug-clinics",
+      "configurePreset": "debug-clinics",
+      "configuration": "Debug",
+      "targets": [
+        "cpp_lifetime_bug_clinic",
+        "cpp_bounds_bug_clinic"
+      ]
+    },
+    {
+      "name": "asan",
+      "configurePreset": "asan",
+      "configuration": "RelWithDebInfo",
+      "targets": [
+        "cpp_lifetime_bug_clinic",
+        "cpp_bounds_bug_clinic"
+      ]
+    },
+    {
+      "name": "asan-ubsan",
+      "configurePreset": "asan-ubsan",
+      "configuration": "RelWithDebInfo",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "targets": [
+        "cpp_lifetime_bug_clinic",
+        "cpp_bounds_bug_clinic"
+      ]
     }
   ],
   "testPresets": [

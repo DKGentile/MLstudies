@@ -23,6 +23,12 @@ decode → resize/normalize → detector → confidence/NMS → detections
                                               overlay / metrics / output
 ```
 
+Chapter 04's camera geometry and this capstone's box geometry answer different
+questions. Intrinsics and extrinsics map a 3-D world or camera point to a pixel;
+letterboxing maps between two 2-D image coordinate systems; IoU compares regions
+already expressed in one image coordinate system. Name the relevant frames and
+transforms instead of treating all three operations as interchangeable geometry.
+
 Measure decode, preprocess, inference, postprocess, tracking, and rendering
 separately. “Model FPS” and “camera-to-output FPS” answer different questions.
 

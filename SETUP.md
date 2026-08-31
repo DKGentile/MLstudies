@@ -50,10 +50,40 @@ The exercises require a C++17 compiler. Reasonable choices are:
 - Linux: GCC or Clang plus CMake and Ninja.
 
 Each C++ chapter shows a direct compiler command as well as CMake where supplied.
-Compile with warnings enabled. Add AddressSanitizer/UndefinedBehaviorSanitizer on a
-platform where your compiler supports them.
+Compile with warnings enabled. The C++ and Systems chapters provide separate,
+opt-in clinic builds; do not mix their instrumented objects with the ordinary
+build tree.
 
-## 4. CUDA host
+Sanitizer support is platform-specific:
+
+- MSVC on supported x86/x64 Windows versions provides AddressSanitizer. It does
+  not provide the course's UBSan or TSan route.
+- GCC/Clang on Linux or WSL supports the documented ASan+UBSan build. Run TSan in
+  its own build; do not combine TSan with ASan.
+- A compiler being installed does not guarantee that its sanitizer runtime is
+  installed. Treat a missing runtime as a toolchain capability, not a reason to
+  weaken a clinic.
+
+See the exact presets and limitations in the C++ and Systems chapter build docs.
+
+## 4. Systems networking observations
+
+The required TCP lab uses only loopback sockets and builds natively on Windows or
+POSIX. The observation route is Linux/WSL because `ss`, `tcpdump`, and `strace`
+expose the connection and system calls directly. `tcpdump` may require elevated
+capture permission; the deterministic tests do not.
+
+On Ubuntu/WSL, install the tools only when you reach the lab:
+
+```bash
+sudo apt update
+sudo apt install build-essential cmake ninja-build iproute2 tcpdump strace
+```
+
+Native Windows uses Winsock and links the system `Ws2_32` library; no third-party
+networking framework is required.
+
+## 5. CUDA host
 
 Install the NVIDIA driver first, then a CUDA Toolkit compatible with the driver and
 the code you intend to build. Confirm:
@@ -66,7 +96,7 @@ nvcc --version
 PyTorch wheels carry the CUDA runtime components they need; building CUDA C++ labs
 still requires a local toolkit and `nvcc`. These are related but separate setups.
 
-## 5. Optional ML and deployment packages
+## 6. Optional ML and deployment packages
 
 ```powershell
 python -m pip install -r requirements-ml.txt
@@ -84,7 +114,10 @@ python scripts/doctor.py --json > progress/hardware-host.json
 On Jetson, use NVIDIA/JetPack-compatible packages rather than reusing the host lock
 file.
 
-## 6. Verify the scaffold
+The camera-geometry lab requires only NumPy. OpenCV is an optional oracle after a
+first implementation, not a new prerequisite for Chapter 04.
+
+## 7. Verify the scaffold
 
 ```powershell
 python scripts/validate_repo.py

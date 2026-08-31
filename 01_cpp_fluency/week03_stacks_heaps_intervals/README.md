@@ -6,6 +6,8 @@
   "next greater/smaller" relationship makes old items resolvable in reverse.
 - A heap exposes the current extreme while accepting new candidates in
   logarithmic time. Ask whether you need all items sorted or only the next best.
+  This heap data structure is unrelated to using "the heap" as shorthand for a
+  process's dynamic-allocation region.
 - Interval problems usually become local after sorting by a meaningful endpoint.
   State whether intervals are open or closed before deciding if touching means
   overlap.
@@ -30,13 +32,24 @@ Required reading, about 25-35 minutes total:
 
 Optional video: [MIT 6.006 Lecture 4: Heaps and Heap Sort](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-4-heaps-and-heap-sort/).
 
+**Required Modern C++ thread:** complete the Week 3 route in
+[Modern C++ engineering](../modern_cpp_engineering/README.md). Read the focused
+RAII and smart-pointer rules, then implement the allocation, destruction, and
+move operations for `OwnedBuffer`. Before typing each special member, draw the
+source and destination `{pointer, size}` state before and after it. The exercise
+replaces one problem-pack item; the million-element comparison becomes an
+after-first-attempt extension.
+
 Before coding, verify that you can:
 
 - state what every item remaining on a stack is waiting for;
 - choose which extreme belongs at a heap root and maintain a size-`k` invariant;
 - justify why retaining only `k` candidates can beat sorting all `n`; and
 - state the interval endpoint convention, overlap rule, and sort key that makes
-  a one-pass sweep valid.
+  a one-pass sweep valid;
+- distinguish raw ownership from a raw borrow and state the destructor that
+  closes every successful acquisition path; and
+- explain why `std::move` alone neither transfers nor destroys a resource.
 
 ## Week plan
 
@@ -46,8 +59,8 @@ Before coding, verify that you can:
 | Tue | monotonic stack for unresolved temperatures |
 | Wed | k-th largest with a bounded heap; compare two heap orientations |
 | Thu | sort and sweep closed intervals |
-| Fri | edge tests, complexity notes, log update |
-| Sat | problem pack plus the stream experiment in `EXERCISES.md` |
+| Fri | edge tests, then `OwnedBuffer` allocation/destruction and copy deletion |
+| Sat | move/view tests, four-item problem pack, and the optional stream experiment if time remains |
 
 ## Checkpoint questions
 
@@ -55,3 +68,7 @@ Before coding, verify that you can:
 2. Why can a heap of size `k` be better than sorting all `n` elements?
 3. Which sort key makes your interval sweep correct?
 4. Does `[1, 4]` overlap `[4, 6]` under this module's contract?
+5. After move construction, which object owns the allocation and which exact
+   state makes the source destructor safe?
+6. When is shared ownership necessary, and why is `shared_ptr` not a default
+   substitute for reasoning about one owner and its borrowers?

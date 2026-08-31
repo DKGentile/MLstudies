@@ -39,6 +39,13 @@ Optional videos: use [MIT 6.006 Lecture 13: BFS](https://ocw.mit.edu/courses/6-0
 or [Lecture 14: DFS and topological sort](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/resources/lecture-14-depth-first-search-dfs-topological-sort/)
 for whichever traversal is less secure.
 
+**Required Modern C++ consolidation:** complete the Week 4 route in
+[Modern C++ engineering](../modern_cpp_engineering/README.md). Contrast the raw
+borrowed `TreeNode*` API with the ownership of whatever tree-building scope
+created those nodes. Finish `OwnedBuffer` and its `variant` result contract,
+then compare its necessary Rule-of-Five code with a Rule-of-Zero design. State
+the real exception guarantee of each acquisition/transfer operation.
+
 Before coding, verify that you can:
 
 - state the base case and smaller subtree question for a recursive tree operation;
@@ -46,9 +53,11 @@ Before coding, verify that you can:
 - match shortest unweighted path, reachability, repeated connectivity, and
   dependency ordering to the appropriate abstraction;
 - state the representative and tree-size/rank invariants maintained by union-find;
-  and
 - explain what indegree zero certifies and why a remaining directed cycle blocks
-  a complete topological order.
+  a complete topological order;
+- identify the lifetime owner behind each `TreeNode*` and traversal borrow; and
+- explain Rule of Zero versus Rule of Five, a moved-from contract, and when an
+  `optional` or `variant` expresses state without shared ownership.
 
 ## Week plan
 
@@ -58,8 +67,8 @@ Before coding, verify that you can:
 | Tue | iterative DFS and BFS distance map |
 | Wed | connected components and union-find with path compression/rank or size |
 | Thu | Kahn or finish-time topological sort, including cycle detection |
-| Fri | redraw traversals, run tests, update log |
-| Sat | problem pack and the graph-format integration task |
+| Fri | redraw traversals; finish ownership/safety tests; update the diagnostic log |
+| Sat | problem pack, graph-format integration task, and both phase exit rehearsals |
 
 ## Phase exit rehearsal
 
@@ -67,7 +76,10 @@ On Saturday, close the starter files. From a blank file implement:
 
 1. BFS distances on an adjacency list;
 2. a union-find with `find`, `unite`, and `connected`;
-3. a tiny test graph with a disconnected node.
+3. a tiny test graph with a disconnected node; and
+4. the core of a move-only owner with an empty moved-from state.
 
 You pass the gate only if it compiles with warnings and your explanation covers
-time and space, including why path compression changes repeated-find cost.
+time and space, including why path compression changes repeated-find cost. The
+owner must also pass its contract under AddressSanitizer, and you must explain
+why its destruction and move paths release every allocation exactly once.

@@ -2,25 +2,30 @@
   "title": "Embedded AI / ML Engineering Lab",
   "weeks": 26,
   "chapters": [
-    {"id": "cpp", "weeks": "1-4", "path": "01_cpp_fluency", "artifact": "tested C++ patterns"},
-    {"id": "systems", "weeks": "1-4", "path": "02_systems", "artifact": "bounded concurrent queue"},
+    {"id": "cpp", "weeks": "1-4", "path": "01_cpp_fluency", "artifact": "tested algorithms and move-only ownership"},
+    {"id": "systems", "weeks": "1-4", "path": "02_systems", "artifact": "bounded TCP-to-worker pipeline"},
     {"id": "ml", "weeks": "3-6", "path": "03_ml_fundamentals", "artifact": "models from scratch"},
-    {"id": "cv", "weeks": "5-8", "path": "04_computer_vision", "artifact": "CNN experiment report"},
+    {"id": "cv", "weeks": "5-9", "path": "04_computer_vision", "artifact": "CNN report and camera-geometry primitives"},
     {"id": "cuda", "weeks": "6-12", "path": "05_cuda", "artifact": "correct custom kernels"},
     {"id": "optimization", "weeks": "11-14", "path": "06_gpu_optimization", "artifact": "profiled speedup report"},
     {"id": "capstone", "weeks": "10-22", "path": "07_edge_detect_track", "artifact": "measured edge pipeline"},
-    {"id": "interviews", "weeks": "18-26", "path": "08_interviews", "artifact": "evidence packet"}
+    {"id": "interviews", "weeks": "18-26", "path": "08_interviews", "artifact": "evidence packet and interview reconnaissance"}
   ],
+  "application_tracks": {
+    "A": "apply immediately where existing professional SWE evidence is sufficient",
+    "B": "expand into C++ systems and integration roles as relevant artifacts appear",
+    "C": "target GPU perception and edge specialists when role-specific evidence gates pass"
+  },
   "week_focus": {
     "1": "arrays, hashing, two pointers; processes",
-    "2": "binary search, sliding windows; address spaces",
-    "3": "stacks, heaps, intervals; threads; logistic regression",
-    "4": "trees, graphs, union-find; regularization",
+    "2": "binary search, sliding windows; lifetime, borrowing, address spaces, debugging",
+    "3": "stacks, heaps, intervals; RAII, moves, threads, logistic regression",
+    "4": "trees, graphs, union-find; TCP framing and bounded pipelines; regularization",
     "5": "classifiers, validation, softmax",
     "6": "backprop; CUDA indexing",
     "7": "convolution primitives; CUDA memory access",
-    "8": "PyTorch CNN; CUDA learning weekend",
-    "9": "CUDA launch geometry; capstone definition",
+    "8": "PyTorch CNN; camera-frame notation; optional CUDA companion",
+    "9": "CUDA launch geometry; camera frames and pinhole projection; capstone definition",
     "10": "reduction; dataset audit",
     "11": "histograms and atomics; detector setup",
     "12": "blur; detector training baseline",
@@ -33,10 +38,10 @@
     "19": "failure analysis and pipeline design",
     "20": "TensorRT target build and resume evidence",
     "21": "time-boxed Jetson port",
-    "22": "capstone freeze and applications",
+    "22": "capstone freeze; specialist applications expand with evidence",
     "23": "reliability review",
     "24": "optimization review",
-    "25": "portfolio walkthroughs",
+    "25": "portfolio walkthroughs; targeted applications; triggered reconnaissance as needed",
     "26": "final audit and retrospective"
   }
 }

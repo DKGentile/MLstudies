@@ -11,7 +11,7 @@ map as follows:
 | 2. Study method | Red-test/recall workflow plus weekly exercise sheets |
 | 3. Resource library | `docs/resources.md` and focused references inside each lab |
 | 4. Week-by-week syllabus | `COURSE_MAP.md` and eight numbered chapter directories |
-| 5. Definition of done | Phase gates in `COURSE_MAP.md` and the application gate in Chapter 08 |
+| 5. Definition of done | Competency gates in `COURSE_MAP.md` and role-specific evidence gates in Chapter 08 |
 | 6. Resume targets | `08_interviews/evidence_matrix.template.md` and walkthrough drill |
 | 7. What not to do | Scope guardrails in the capstone and learning guide |
 | 8. Calendar | `scripts/make_schedule.py` |
@@ -21,11 +21,24 @@ The four learning phases become executable chapters:
 
 | Source idea | Repository location | Translation |
 |---|---|---|
-| Phase 0 “un-rust” | `01_cpp_fluency`, `02_systems` | Recall drills, C++17 starters, behavior tests, applied OS experiments |
-| Phase 1 ML math + PyTorch | `03_ml_fundamentals`, `04_computer_vision` | Derivations become numerical checks; notes become implementations |
+| Phase 0 “un-rust” | `01_cpp_fluency`, `02_systems` | Algorithms plus ownership/RAII, debugger/sanitizer clinics, OS experiments, concurrency, and TCP framing |
+| Phase 1 ML math + PyTorch | `03_ml_fundamentals`, `04_computer_vision` | Derivations become numerical checks; image operators, CNNs, and camera transforms become implementations |
 | Phase 2 CUDA | `05_cuda`, `06_gpu_optimization` | Kernels, CPU oracles, timing harnesses, profiler worksheets |
 | Phase 3 detect-track | `07_edge_detect_track` | Gated project from data audit through edge deployment |
-| Phase 4 applications | `08_interviews` | Timed practice, design rubrics, and evidence-based resume prompts |
+| Phase 4 applications | `08_interviews` | Immediate/expanding/specialist application tracks, timed practice, public-process reconnaissance, and evidence-based claims |
+
+The supporting knowledge now forms one dependency path rather than independent
+mini-courses:
+
+```text
+algorithms → C++ ownership/lifetime → systems/debugging/networking
+           → ML/backprop → CV/camera geometry → CUDA/profiling
+           → detection/tracking/ONNX/TensorRT → interview evidence + recon
+```
+
+Camera geometry stops at the coordinate-frame and pinhole foundations needed for
+perception work. Networking stops at real TCP stream handling and a bounded local
+pipeline. Neither branch becomes a robotics/SLAM or distributed-systems phase.
 
 The source's dates and vendor model names are treated as suggestions. Volatile
 compatibility facts live in `docs/compatibility.md` so the conceptual exercises do

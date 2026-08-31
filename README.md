@@ -37,17 +37,27 @@ and explain what can still be completed on CPU.
 
 | Chapter | Weeks | What you build | Exit artifact |
 |---|---:|---|---|
-| [01 · C++ Fluency](01_cpp_fluency) | 1–4 | Data structures and interview patterns from memory | Tested C++ implementations |
-| [02 · Systems](02_systems) | 1–4 | Process, memory, thread, and locking experiments | Thread-safe bounded queue + measurements |
+| [01 · C++ Fluency](01_cpp_fluency) | 1–4 | Algorithms plus ownership, RAII, moves, and debugging | Tested patterns + move-only buffer evidence |
+| [02 · Systems](02_systems) | 1–4 | Processes, memory, concurrency, TCP framing, and backpressure | Bounded network-to-worker pipeline |
 | [03 · ML Fundamentals](03_ml_fundamentals) | 3–6 | NumPy models, losses, gradients, regularization | Logistic regression and two-layer net from scratch |
-| [04 · Computer Vision](04_computer_vision) | 5–8 | Image operators and a small CNN | CIFAR-10 experiment report with curves |
+| [04 · Computer Vision](04_computer_vision) | 5–9 | Image operators, a small CNN, and camera geometry | CNN report + tested projection primitives |
 | [05 · CUDA](05_cuda) | 6–12 | Kernels from indexing through reduction and blur | Correct CUDA kernels with CPU references |
 | [06 · GPU Optimization](06_gpu_optimization) | 11–14 | Reproducible profiling and optimization | Two-GPU benchmark report |
 | [07 · Edge Detect + Track](07_edge_detect_track) | 10–22 | Detector, evaluation, tracker, ONNX, TensorRT, Jetson | Measured end-to-end capstone |
-| [08 · Interviews + Evidence](08_interviews) | 18–26 | Timed drills, design exercises, resume evidence | Application-ready evidence packet |
+| [08 · Interviews + Evidence](08_interviews) | 18–26 | Timed drills, design exercises, evidence, market calibration | Evidence packet + dated reconnaissance |
 
 The phases overlap deliberately. See [COURSE_MAP.md](COURSE_MAP.md) for the
 week-by-week route and gates.
+
+## Applications while learning
+
+This curriculum expands the radius of roles you can defend; it is not a
+six-month embargo on applying. Apply immediately to general or bridge SWE roles
+already supported by your professional evidence. Expand into C++/systems and
+hardware-integration roles as those artifacts appear. Treat CUDA, perception,
+edge-inference, and TensorRT-heavy roles as evidence-gated specialist targets.
+See the [three-track model](08_interviews/README.md#three-application-tracks) and
+keep every claim truthful.
 
 ## The daily loop
 
@@ -55,9 +65,11 @@ week-by-week route and gates.
    without the source open.
 2. Implement the starter exercise without an assistant-generated solution.
 3. Run the nearest test; use the failure as feedback.
-4. Explain the invariant, complexity, or performance model out loud.
-5. Use the after-first-attempt resource only for a concrete gap or result.
-6. Record a number, failure, or decision in your weekly log.
+4. When a clinic calls for it, reproduce the fault under a debugger or sanitizer,
+   name the root cause, repair it, and rerun the same diagnostic.
+5. Explain the invariant, ownership rule, complexity, or performance model aloud.
+6. Use the after-first-attempt resource only for a concrete gap or result.
+7. Record a number, failure, diagnostic, or decision in your weekly log.
 
 Use AI as a reviewer after Weeks 1–2: ask it to identify counterexamples, critique
 a benchmark, or question an explanation. The point of this repository is to make
@@ -85,6 +97,8 @@ downloads datasets, model weights, or paid course material.
 ## Ground rules
 
 - Commit after a coherent exercise, not after every typo.
+- Reproduce a bug before repairing it; do not silence a diagnostic you cannot
+  explain.
 - Never claim a GPU number without warmup, synchronization, and repeated samples.
 - TensorRT engines are target-specific artifacts. Export ONNX once; build an engine
   on each deployment target.

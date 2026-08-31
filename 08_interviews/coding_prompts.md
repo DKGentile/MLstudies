@@ -67,6 +67,13 @@ complexity, and one production-oriented extension.
     clock so tests do not sleep.
 18. **Shape-safe arena (45 min):** Design an API that reuses byte buffers for tensor
     shapes without returning undersized memory. Focus on invariants and overflow.
+19. **Move-only transport buffer (45 min):** Implement a byte owner with deleted
+    copy operations, noexcept moves, explicit borrowed views, and a valid empty
+    moved-from state. Explain destruction and exception safety.
+20. **Length-prefixed stream decoder (45 min):** Consume arbitrarily chunked bytes
+    containing big-endian length-prefixed messages. Emit every complete message,
+    reject an oversized body, and distinguish clean EOF from a truncated frame.
+    One input chunk may contain half a prefix or several messages.
 
 ## Review protocol
 

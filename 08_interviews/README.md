@@ -4,9 +4,28 @@
 **Outcome:** you can solve familiar patterns under time pressure, design an edge
 inference system aloud, and support every resume claim with an artifact.
 
-This chapter runs in parallel with the capstone. Start applications when the
-capstone contains reproducible accuracy and latency numbers—not when the calendar
-reaches a particular date.
+This chapter runs in parallel with the capstone. Application timing follows the
+role-specific evidence you can already defend, not a curriculum date. The course
+expands the radius of defensible applications; it is not a six-month employment
+embargo.
+
+## Three application tracks
+
+- **Track A — apply immediately:** your existing production-SWE experience may
+  already support general/early-career SWE, backend, mission or manufacturing
+  software, and bridge roles inside robotics, defense, or industrial companies.
+  This curriculum is not a prerequisite for those applications.
+- **Track B — expand as evidence appears:** add C++ systems,
+  embedded-adjacent, hardware/software integration, robotics-adjacent, factory
+  automation, and device-interface roles when the corresponding C++/systems
+  artifacts exist and you can explain them truthfully.
+- **Track C — evidence-gated specialist roles:** make CUDA/GPU, perception/CV,
+  edge inference, and TensorRT-heavy roles serious targets once the relevant
+  kernels, evaluation, deployment, and measurements actually exist.
+
+Applying early does not authorize unsupported claims. A role can sit in a
+different track for you than for someone else; the evidence you can defend is the
+boundary.
 
 ## Weekly preparation route
 
@@ -35,6 +54,12 @@ your own code and artifacts; reading does not count as interview practice.
   choose one weak claim to strengthen or remove.
 - Every other week: a full mock using [mock_scorecard.md](mock_scorecard.md).
 
+Outside that weekly loop, use the
+[interview reconnaissance protocol](interview_recon.md) once when a serious role
+search begins, before a specific interview loop, and optionally every 4–6 weeks
+while targets are changing. It is not recurring weekly homework. Start each
+session from [the reusable template](interview_recon.template.md).
+
 ## Target-specific emphasis
 
 For perception/CV/ML roles, lead with C++, CUDA, model evaluation, inference
@@ -45,7 +70,7 @@ For a field/deployment engineering parallel track, also complete
 [operational_decomposition.md](operational_decomposition.md). The exercise is about
 objects, actions, permissions, failure recovery, and evaluation—not vendor jargon.
 
-## Application gate
+## Track C specialist-evidence gate
 
 - [ ] Capstone accuracy and latency commands reproduce
 - [ ] You can implement BFS and a bounded concurrent queue without notes
@@ -55,5 +80,6 @@ objects, actions, permissions, failure recovery, and evaluation—not vendor jar
 - [ ] Every numerical resume claim has an evidence location
 - [ ] You have rehearsed a five-minute and a fifteen-minute capstone walkthrough
 
-If a gate is false, keep applying selectively only when you can describe the gap
-truthfully. Do not fabricate certainty or performance.
+These checks expand specialist targeting; they do not block Track A or every
+Track B application. If a gate is false, target only roles for which you can
+describe the gap truthfully. Do not fabricate certainty or performance.

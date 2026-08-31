@@ -1,17 +1,22 @@
 #pragma once
 
 #include <cstddef>
+#include <cstdint>
 #include <vector>
 
 namespace systems_course::week04 {
 
 struct Frame {
-  std::size_t sequence = 0;
-  std::vector<int> samples;
+  std::uint64_t sequence = 0;
+  std::vector<std::int32_t> samples;
 };
 
+inline bool operator==(const Frame& left, const Frame& right) {
+  return left.sequence == right.sequence && left.samples == right.samples;
+}
+
 struct FrameResult {
-  std::size_t sequence = 0;
+  std::uint64_t sequence = 0;
   long long peak_to_peak = 0;
 };
 
@@ -35,4 +40,3 @@ PipelineReport process_frames(const std::vector<Frame>& frames,
                               std::size_t queue_capacity);
 
 }  // namespace systems_course::week04
-

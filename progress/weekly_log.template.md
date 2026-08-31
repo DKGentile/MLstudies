@@ -17,7 +17,9 @@ and commit where relevant.
 
 **What broke and why:**
 
+**Debugger/sanitizer evidence (when assigned):** Record the reproducer, diagnostic
+configuration, first causal frame/access, root cause, repair, and clean rerun.
+
 **One concept I can now explain aloud:**
 
 **Carry-over (maximum two items):**
-

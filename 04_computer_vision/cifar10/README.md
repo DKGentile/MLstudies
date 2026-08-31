@@ -7,8 +7,8 @@ plotting. Search `train.py` for `TODO`.
 
 ## 1. Install PyTorch deliberately
 
-Do not assume the repository's current Python 3.14 interpreter has compatible
-PyTorch packages. Check the official [PyTorch install
+Do not assume an arbitrary Python/CUDA combination has compatible PyTorch
+packages. Check the official [PyTorch install
 selector](https://pytorch.org/get-started/locally/) for the Python/CUDA pair on
 the target machine. If it does not offer a matching wheel, create a separate
 supported Python environment (often Python 3.12 is a practical course

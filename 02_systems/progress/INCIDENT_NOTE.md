@@ -9,7 +9,7 @@ Observed state: ____________________
 ## Causal chain
 
 1. Thread/process/event that occurred:
-2. Shared or inherited state involved:
+2. Shared, inherited, buffered, or framed state involved:
 3. Missing, reordered, or unexpected transition:
 4. Why that produced the symptom:
 

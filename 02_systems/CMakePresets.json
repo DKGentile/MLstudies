@@ -14,6 +14,55 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
+    },
+    {
+      "name": "debug-clinics",
+      "inherits": "default",
+      "displayName": "Intentional bug clinics (no sanitizer)",
+      "binaryDir": "${sourceDir}/build/debug-clinics",
+      "cacheVariables": {
+        "MLSTUDIES_BUILD_BUG_CLINICS": "ON"
+      }
+    },
+    {
+      "name": "asan",
+      "inherits": "default",
+      "displayName": "AddressSanitizer",
+      "binaryDir": "${sourceDir}/build/asan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "MLSTUDIES_SANITIZER": "address"
+      }
+    },
+    {
+      "name": "asan-ubsan",
+      "inherits": "default",
+      "displayName": "AddressSanitizer + UndefinedBehaviorSanitizer (GCC/Clang)",
+      "binaryDir": "${sourceDir}/build/asan-ubsan",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "MLSTUDIES_SANITIZER": "address-undefined"
+      }
+    },
+    {
+      "name": "tsan",
+      "inherits": "default",
+      "displayName": "ThreadSanitizer race clinic (Linux/WSL only)",
+      "binaryDir": "${sourceDir}/build/tsan",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "MLSTUDIES_BUILD_BUG_CLINICS": "ON",
+        "MLSTUDIES_SANITIZER": "thread"
+      }
     }
   ],
   "buildPresets": [
@@ -21,6 +70,38 @@
       "name": "default",
       "configurePreset": "default",
       "configuration": "Debug"
+    },
+    {
+      "name": "debug-clinics",
+      "configurePreset": "debug-clinics",
+      "configuration": "Debug",
+      "targets": ["systems_race_clinic"]
+    },
+    {
+      "name": "asan",
+      "configurePreset": "asan",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "asan-ubsan",
+      "configurePreset": "asan-ubsan",
+      "configuration": "RelWithDebInfo",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "tsan",
+      "configurePreset": "tsan",
+      "configuration": "Debug",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "targets": ["systems_race_clinic"]
     }
   ],
   "testPresets": [
@@ -28,6 +109,33 @@
       "name": "default",
       "configurePreset": "default",
       "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      }
+    },
+    {
+      "name": "asan",
+      "configurePreset": "asan",
+      "configuration": "RelWithDebInfo",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      }
+    },
+    {
+      "name": "asan-ubsan",
+      "configurePreset": "asan-ubsan",
+      "configuration": "RelWithDebInfo",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
       "output": {
         "outputOnFailure": true
       },

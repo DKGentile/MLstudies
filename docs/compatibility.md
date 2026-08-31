@@ -1,6 +1,6 @@
 # Hardware and Version Strategy
 
-Last reviewed: **2026-08-27**. Re-check the linked support matrices before changing
+Last reviewed: **2026-08-30**. Re-check the linked support matrices before changing
 a working machine.
 
 ## Keep three environments separate
@@ -30,6 +30,32 @@ environment remains a conservative interoperability choice when ONNX, TensorRT,
 OpenCV, and training packages must coexist. The Jetson uses the Python and binary
 packages compatible with its JetPack image, not the host environment.
 
+## Native diagnostics and networking
+
+| Capability | Native Windows/MSVC | Linux or WSL GCC/Clang |
+|---|---|---|
+| Debugger | Visual Studio/VS Code debugger | GDB or LLDB |
+| AddressSanitizer | Supported on documented x86/x64 configurations | Supported when the compiler runtime is installed |
+| UndefinedBehaviorSanitizer | Not supplied by MSVC | Use the course ASan+UBSan configuration |
+| ThreadSanitizer | Not supplied by MSVC; do not imply native support | Separate TSan build; never combine with ASan |
+| TCP lab | Winsock loopback, linked from the Windows SDK | POSIX loopback sockets |
+| Socket observation | platform network tools are optional | `ss`; optional privileged `tcpdump`; optional `strace` |
+
+The intentional bug clinics are opt-in, separate build trees and are never normal
+CTest failures. Sanitizer support belongs to a compiler **and** its installed
+runtime; a `clang++` found on `PATH` is not sufficient evidence by itself.
+
+TCP tests use only `127.0.0.1`, ephemeral ports, and deterministic local payloads.
+No external service or internet access is part of their correctness contract.
+
+## Camera geometry dependency boundary
+
+The required geometry implementation is NumPy-only. OpenCV may be used after the
+first attempt as an independent projection/calibration oracle, but is not required
+just to complete the lab. The course covers calibration and radial/tangential
+distortion conceptually without adding stereo, reconstruction, visual odometry,
+bundle adjustment, or SLAM.
+
 ## Primary references
 
 - [PyTorch local installation](https://pytorch.org/get-started/locally/)
@@ -39,4 +65,7 @@ packages compatible with its JetPack image, not the host environment.
 - [Ultralytics train mode](https://docs.ultralytics.com/modes/train/)
 - [Ultralytics export mode](https://docs.ultralytics.com/modes/export/)
 - [Ultralytics track mode](https://docs.ultralytics.com/modes/track/)
-
+- [MSVC AddressSanitizer](https://learn.microsoft.com/en-us/cpp/sanitizers/asan?view=msvc-170)
+- [Clang AddressSanitizer](https://clang.llvm.org/docs/AddressSanitizer.html),
+  [UndefinedBehaviorSanitizer](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html),
+  and [ThreadSanitizer](https://clang.llvm.org/docs/ThreadSanitizer.html)

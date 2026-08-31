@@ -29,3 +29,15 @@ Without notes, answer: why BFS gives shortest paths only for unweighted (or
 equal-weight) edges; when DFS recursion can overflow; why union by rank/size is
 paired with path compression; and what an indegree of zero means.
 
+## E. Modern C++ engineering gate
+
+Complete the Week 4 section of
+[`modern_cpp_engineering/EXERCISES.md`](../modern_cpp_engineering/EXERCISES.md).
+Run the ownership target with AddressSanitizer, compare Rule-of-Five and
+Rule-of-Zero designs, draw one `shared_ptr` cycle and its `weak_ptr` observation
+edge, and state the actual exception guarantee of each `OwnedBuffer` operation.
+
+Then inspect the `TreeNode*` API and answer: who owns each node in the supplied
+tests, which functions borrow it, and what change would make a stored pointer in
+a returned result dangle? Do not change the tree API merely to avoid answering
+the lifetime question.

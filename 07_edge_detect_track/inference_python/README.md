@@ -11,6 +11,10 @@ Before coding, write the affine mapping from original coordinates to resized,
 padded coordinates and its inverse. Record scale and both padding offsets; test
 odd padding and non-square images before attaching a model.
 
+This is a 2-D image-plane coordinate transform, not a pinhole-camera extrinsic.
+Review Chapter 04's camera-frame notation if you cannot state why letterbox
+metadata does not determine camera pose, focal length, or a 3-D point's depth.
+
 Use the Python path to establish correctness and stage-level timings before taking
 on TensorRT C++ integration.
 

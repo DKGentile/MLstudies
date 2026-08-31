@@ -13,11 +13,10 @@ PipelineReport process_frames(const std::vector<Frame>& frames,
   (void)worker_count;
   (void)queue_capacity;
 
-  // TODO: Use systems_course::week03::BoundedQueue as the bounded handoff.
+  // LEARNER TODO: Use systems_course::week03::BoundedQueue as the bounded handoff.
   // Preserve input positions separately from Frame::sequence so duplicate
   // sequence values remain well-defined. Own and join every worker on all paths.
-  throw std::logic_error("TODO: implement process_frames");
+  throw std::logic_error("LEARNER TODO: implement process_frames");
 }
 
 }  // namespace systems_course::week04
-

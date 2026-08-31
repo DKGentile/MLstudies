@@ -5,6 +5,13 @@ small executable with a CPU reference, deliberately incomplete GPU kernel, and a
 correctness gate. Implement only the `TODO(learner)` regions; the harness tells
 you when your kernel is correct and then reports a kernel-only timing.
 
+Before writing an owning device-memory wrapper, revisit the C++
+[move-only `OwnedBuffer` exercise](../01_cpp_fluency/modern_cpp_engineering/README.md).
+The resource changes from host bytes to a CUDA allocation, but the ownership
+questions do not: exactly one object releases it, moves transfer responsibility,
+and borrowed pointers never outlive the owner. Keep kernel indexing work separate
+from that later RAII extension so a lifetime bug cannot masquerade as kernel math.
+
 ## Learning path
 
 | Lab | Problem | Primary idea | Done when |
