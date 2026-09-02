@@ -4,12 +4,21 @@
 
 namespace cpp_course::week02 {
 
-std::size_t first_not_less_than(const std::vector<int>& sorted_values,
-                                int target) {
-  (void)sorted_values;
-  (void)target;
-  throw std::logic_error("TODO: implement first_not_less_than");
+std::size_t first_not_less_than(const std::vector<int>& sorted_values, int target) 
+{
+  if(sorted_values.size()<1) return sorted_values.size();
+  
+  int left = 0, right = sorted_values.size()-1;
+  while(left<right)
+  {
+    int mid = (right+left)/2;
+    if(sorted_values[mid] >= target) right = mid;
+    else left=mid+1;
+  }
+  return (sorted_values[left]>=target) ? left : sorted_values.size();
 }
+
+
 
 std::ptrdiff_t rotated_search(const std::vector<int>& values, int target) {
   (void)values;
