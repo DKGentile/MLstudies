@@ -1,6 +1,7 @@
 #include "week02.hpp"
 
 #include <stdexcept>
+#include <algorithm>
 
 namespace cpp_course::week02 {
 
@@ -48,24 +49,29 @@ std::ptrdiff_t rotated_search(const std::vector<int>& values, int target)
 
 
 int minimum_eating_speed(const std::vector<int>& piles, long long hours) {
-  if(piles.size()<1 || piles.size()>hours) throw std::invalid_argument("NO BANANAS!");
-  if(piles.size()==1) return static_cast<long long>(piles[0])/hours;
+  if( 1 > piles.size() || hours < static_cast<long long>(piles.size()) )  
+  throw std::invalid_argument("NO BANANA TIME!");
 
-  int speed = *std::max(piles.begin(),piles.end()), temp_hours = 0;
+  auto [min_it, max_it] = std::minmax_element(piles.begin(), piles.end());
 
-  while(temp_hours<hours)
+  int minimum = *min_it;
+  int maximum = *max_it;
+
+  if(minimum < 1 || maximum < 1) throw std::invalid_argument("NO BANANS!");
+
+  while(minimum<maximum)
   {
-    for(int i = 0; i < piles.size(); i++)
+    int temp_speed = minimum + (maximum-minimum)/2;
+    long long temp_hours = 0;
+    for(int pile : piles)
     {
-      temp_hours+= (piles[i]+speed-1)/speed;
+      temp_hours += (pile + temp_speed - 1) / temp_speed;
       if(temp_hours>hours) break;
     }
-    if(temp_hours>hours;)
-    {
-      
-    }
+    if(temp_hours<=hours) maximum = temp_speed;
+    else minimum = temp_speed+1;
   }
-
+  return minimum;
 }
 
 std::size_t minimum_window_length(const std::vector<int>& values,
