@@ -74,11 +74,39 @@ int minimum_eating_speed(const std::vector<int>& piles, long long hours) {
   return minimum;
 }
 
-std::size_t minimum_window_length(const std::vector<int>& values,
-                                  long long target) {
-  (void)values;
-  (void)target;
-  throw std::logic_error("TODO: implement minimum_window_length");
+std::size_t minimum_window_length(const std::vector<int>& values, long long target) 
+{
+  for(const int& x : values) if (x<0) throw std::invalid_argument("Negative value in 'values'.");
+  //comment out previous line for efficiency. 
+  if(values.empty() || target<=0) return 0;
+  
+
+  std::size_t window = values.size(), begin = 0;
+  long long temp_sum = 0;
+  
+  for(size_t i = 0; i < values.size(); i++)
+  {
+    //if(values[i]<0) throw std::invalid_argument("Negative value in 'values'.");
+    //uncomment if initial negative check is
+    temp_sum+=values[i];
+    if(temp_sum>=target)
+    {
+      for(size_t j = begin; j <= i; j++)
+      {
+        
+        if(temp_sum-values[j]<target)
+        {
+          begin = j;
+          break;
+        }
+        temp_sum-=values[j];
+      }
+      std::size_t temp_window = i-begin+1;
+      if(window>temp_window) window = temp_window;
+      if(window == 1) return window;
+    }
+  }
+  return (temp_sum>=target) ? window : 0;
 }
 
 std::size_t longest_unique_span(std::string_view text) {
