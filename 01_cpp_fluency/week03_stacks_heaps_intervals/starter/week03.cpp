@@ -4,9 +4,32 @@
 
 namespace cpp_course::week03 {
 
-bool brackets_balanced(std::string_view text) {
-  (void)text;
-  throw std::logic_error("TODO: implement brackets_balanced");
+bool brackets_balanced(std::string_view text) 
+{
+  std::string list;
+  for(const char& c : text)
+  {
+    if(c=='(' || c=='[' || c=='{') list.push_back(c);
+    else if (c==')' || c==']' || c=='}')
+    {
+      if(list.empty()) return false;
+      switch(list.back())
+      {
+        case '(':
+          if(c!=')') return false;
+          break;
+        case '{':
+          if(c!='}') return false;
+          break;
+        case '[':
+          if(c!=']') return false;
+          break;
+      }
+      list.pop_back();
+    }
+    else return false;
+  }
+  return list.empty();
 }
 
 std::vector<std::size_t> days_until_warmer(
