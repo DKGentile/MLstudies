@@ -32,8 +32,8 @@ bool brackets_balanced(std::string_view text)
   return list.empty();
 }
 
-std::vector<std::size_t> days_until_warmer(
-    const std::vector<int>& temperatures) {
+std::vector<std::size_t> days_until_warmer(const std::vector<int>& temperatures) 
+{
   (void)temperatures;
   throw std::logic_error("TODO: implement days_until_warmer");
 }

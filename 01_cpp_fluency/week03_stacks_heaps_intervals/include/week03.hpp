@@ -21,8 +21,7 @@ bool brackets_balanced(std::string_view text);
 
 // For each day, returns how many later positions must pass before a strictly
 // greater temperature appears, or zero when it never does.
-std::vector<std::size_t> days_until_warmer(
-    const std::vector<int>& temperatures);
+std::vector<std::size_t> days_until_warmer(const std::vector<int>& temperatures);
 
 // Returns the k-th largest value counting duplicates. Throws
 // std::invalid_argument when k == 0 or k > values.size().
